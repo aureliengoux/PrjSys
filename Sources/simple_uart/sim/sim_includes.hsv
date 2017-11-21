@@ -1,0 +1,105 @@
+/**********************************************************
+ * File Name   : sim_includes.hsv
+ * Description : some verilog tasks to handle uart
+ *               communication and some global signals and
+ *               definitions.
+ * Author      : T. Graba (Telecom ParisTECH)
+ * Licence     : This code is distributed 'as is' without
+ *               any warranty.You are free to use it and
+ *               redistribute it under what ever condition
+ *               you want.
+ *********************************************************/
+
+localparam          SYST_CLK_FREQ = 24_000_000;       // Hz
+localparam          UART_BAUD     = 115_200;
+localparam          GIGA          = 1_000_000_000;    // time scale is 1ns
+localparam          SYST_CLK_P    = GIGA/SYST_CLK_FREQ;
+localparam          UART_BAUD_P   = GIGA/UART_BAUD;
+localparam          UART_BAUD_P_16= UART_BAUD_P/16;
+
+// global simulation signals
+reg     n_reset  =  1'b0;
+// System Signals
+reg     clk = 0;
+
+// uart signals
+reg     to_uart = 1;
+wire    fr_uart;
+
+// trigger
+wire trigger;
+
+// system clock
+always #(SYST_CLK_P/2) clk = !clk;
+
+// write serially an 8bit word generating start and stop
+// bits
+task UART_WRITE( input [7:0] word );
+    int i;
+begin
+    // start bit
+    to_uart = 0;
+    #(UART_BAUD_P);
+    for (i=0;i<8;i++)
+    begin
+            to_uart = word[i];
+            #(UART_BAUD_P);
+    end
+    // stop bit
+    i = 255;
+    to_uart = 1;
+    #(UART_BAUD_P);
+end
+endtask
+
+// A write transaction to the TestChip
+task WRITE( input [7:0] data , input [6:0] address );
+begin
+    UART_WRITE({1'b0, address});
+    UART_WRITE(data);
+end
+endtask
+
+// A read transaction to the TestChip
+task READ( input [6:0] address , output reg [7:0] udata);
+    int i;
+begin
+    fork
+    // send a read command
+    begin
+       UART_WRITE({1'b1, address});
+    end
+    // wait for responce
+    begin
+       // wait for start bit
+       while(fr_uart != 0) #(UART_BAUD_P_16);
+
+       for (i=0;i<8;i++)
+       begin
+           #(UART_BAUD_P);
+           udata[i] = fr_uart;
+       end
+           #(UART_BAUD_P);
+           if (!fr_uart) $display ("WARNING! No stop bit  from uart!");
+    end
+    join
+end
+endtask
+
+task CHECK_REG( input[6:0] Addr);
+  reg[7:0] val,rval;
+begin
+   val = $random(); 
+   WRITE(val, Addr);
+   READ (Addr, rval);
+   if (rval != val ) 
+   begin
+     $error("Value read from register %02h is not correct!",Addr);
+     $stop();
+   end
+   else
+     $display("Value read from register %02h is correct!",Addr);
+
+end
+endtask
+

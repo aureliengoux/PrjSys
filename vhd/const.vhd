@@ -9,4 +9,7 @@ package const_def is
         constant KEY_SIZE  : integer := WORD_SIZE * WORDS_NB;-- m*n
 	constant CONST_SEQU: integer :=   3;    
 	constant NB_ROUND  : integer :=  44;
+        constant Z         : std_logic_vector(49 downto 0 ) :="01100110011101001101011001100111010011010110011001";
+        constant SHT_ZEROS : std_logic_vector(WORD_SIZE-1 downto 0) := (others=>'0');
 end const_def;
+

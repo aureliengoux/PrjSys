@@ -6,9 +6,9 @@ library lib_simon;
 
 entity round is
   port(
- 	clk: in std_logic;
+ 	clk : in std_logic;
 	nrst: in std_logic;
-	cntr: in std_logic_vector(NB_ROUND downto 0);
+	count: in std_logic_vector(NB_ROUND downto 0);
         key : in std_logic_vector(KEY_SIZE-1 downto 0);
         plaintxt: in std_logic_vector(DATA_SIZE-1 downto 0);
         ciphertxt: out std_logic_vector (DATA_SIZE-1 downto 0)
@@ -29,10 +29,10 @@ begin
 --next_key<=key
 --end process synchro;
 
-key_gen: process(cntr)
+key_gen: process(count)
 
 begin
- if (cntr="00001") then 
+ if (count="00001") then 
   rkey<= key(WORD_SIZE-1 downto 0) ;
 else 
   -- key(WORD_SIZE*2-1 downto WORD_SIZE) xor (key( downto ())& key());

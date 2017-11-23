@@ -9,15 +9,20 @@ entity round is
  	clk : in std_logic;
 	nrst: in std_logic;
 	count: in std_logic_vector(NB_ROUND downto 0);
-        key : in std_logic_vector(KEY_SIZE-1 downto 0);
-        plaintxt: in std_logic_vector(DATA_SIZE-1 downto 0);
-        ciphertxt: out std_logic_vector (DATA_SIZE-1 downto 0)
+        key_i : in std_logic_vector(KEY_SIZE-1 downto 0);
+	rkey : out std_logic_vector(KEY_SIZE/WORDS_NB-1 downto 0);
+	data_i: in std_logic_vector(DATA_SIZE-1 downto 0); 
+        data_o: out std_logic_vector (DATA_SIZE-1 downto 0)
+
+	--plaintxt/cipertxt pour le top
       );
 end round;
 
 architecture rtl_round of round is 
 
 signal rkey,tmp,tmp1: std_logic_vector(WORD_SIZE-1 downto 0);
+signal ldata : std_logic_vector(DATA_SIZE-1 downto WORD_SIZE);
+signal rdata : std_logic_vector(WORD_SIZE-1 downto 0);
  
 
 begin 
@@ -29,7 +34,7 @@ begin
 --next_key<=key
 --end process synchro;
 
-key_gen: process(count)
+key_gen: process(clk,nrst,key,count)
 
 begin
  if (count="00001") then 
@@ -46,6 +51,10 @@ else
   key <= tmp & key((WORD_SIZE*(WORDS_NB-1)) downto WORD_SIZE);--attention affectation d'une valeur à un signal  
  end if;
 end process key_gen;
+
+data_path : process(clk, nrst,datacount)
+begin
+
 
 end rtl_round;
 

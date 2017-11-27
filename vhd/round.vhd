@@ -22,8 +22,9 @@ end round;
 architecture rtl_round of round is 
 
 signal pr_key,n_key: std_logic_vector(KEY_SIZE-1 downto 0);
-signal ldata : std_logic_vector(DATA_SIZE-1 downto WORD_SIZE);
-signal rdata : std_logic_vector(WORD_SIZE-1 downto 0);
+signal pr_data,n_data: std_logic_vector(DATA_SIZE-1 downto 0);
+--signal ldata : std_logic_vector(DATA_SIZE-1 downto WORD_SIZE);
+--signal rdata : std_logic_vector(WORD_SIZE-1 downto 0);
  
 
 begin 
@@ -32,9 +33,12 @@ synchro_key: process(clk,nrst)
 begin
  if (clk'event and clk='1') then 
   if (nrst='0')then 
- 	pr_key<=key_i;         
+ 	pr_key<=key_i; 
+     data_o<= (others =>'0');        
   else 
  	pr_key<=n_key;
+     pr_data<=n_data;
+     
   end if;
  end if;
 end process synchro_key;
@@ -63,15 +67,15 @@ begin
 end process key_gen;
 
 
+data_path : process(data,count)
 
-
-
-data_path : process(clk, nrst,data,count)
 begin
-if (count< NB_ROUND) then 
-
-elsif () 
-
+if (count<= NB_ROUND ) then 
+  
+ data_out<=
+(( (data_i(DATA_SIZE-2 downto WORD_SIZE)& data_i(DATA_SIZE-1))and (data_i(DATA_SIZE-9 downto WORD_SIZE)&data_i(DATA_SIZE-1 downto DATA_SIZE-8))) xor (data_i(WORD_SIZE-1 downto 0)) xor data_i(WORD_SIZE-1 downto 0) ) xor pr_key(WORD_SIZE-1 downto 0);
+ 
+-- dans le top si count==nb_round alors copier data_out dans le ciphertext
 end if;
 
 end rtl_round;

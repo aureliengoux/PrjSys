@@ -45,8 +45,8 @@ begin
 
 
  s_nrst<='0';
- --s_key_i<= x"1b1a1918131211100b0a090803020100";
-   s_key_i<= x"0000ffff0000ffff0000ffff0000ffff";
+ s_key_i<= x"1b1a1918131211100b0a090803020100";
+ -- s_key_i<= x"0000ffff0000ffff0000ffff0000ffff";
  s_plaintext<=x"656b696c20646e75";
   
 -- s_key_i<=();

@@ -19,7 +19,7 @@ end round;
 architecture rtl_round of round is 
 
 signal cr_key,n_key: std_logic_vector(KEY_SIZE-1 downto 0);
-signal a,b,c,msb_key,s3_key,s1_key,s3xorkey,new_r_key:std_logic_vector(WORD_SIZE-1 downto 0);--------
+signal zji,a,b,c,msb_key,s3_key,s1_key,s3xorkey,new_r_key:std_logic_vector(WORD_SIZE-1 downto 0);--------
 
 signal i:std_logic;------------
 
@@ -68,7 +68,7 @@ begin
  s3_key <= (others => '-');
  s3xorkey <= (others => '-');
  s1_key <= (others => '-');
-  if (count < (NB_ROUND-WORDS_NB))then
+  if (count < (NB_ROUND))then
   	msb_key <= cr_key(KEY_SIZE-1 downto (WORD_SIZE*(WORDS_NB-1)));--get les 32 msbs
  	s3_key <= msb_key(2 downto 0)&msb_key(WORD_SIZE-1 downto 3); -- rotation vers la droite (3 bits)
 
@@ -86,13 +86,16 @@ begin
 
        a <= s3xorkey xor cr_key(WORD_SIZE-1 downto 0);
        b <= a xor s1_key;
-       i <= key_i(0) xor Z(to_integer(unsigned(count)));
-       c <=  b xor ( key_i(WORD_SIZE-1 downto 1)& i);
-      
+       --i <= key_i(0) xor Z(to_integer(unsigned(count)));
+       --i  <= Z(to_integer(unsigned(count) mod 62 )  xor 3 --x"fffffffc"
+       --c <=  b xor ( key_i(WORD_SIZE-1 downto 1)& i);
+      zji<=ROUND_CONST(WORD_SIZE-1 downto 1)& Z(to_integer(unsigned(count))); 
+      c <=  b xor zji;
+
    n_key <= c & cr_key((WORD_SIZE*WORDS_NB)-1 downto WORD_SIZE);
   
- elsif (count>=(NB_ROUND-WORDS_NB) and count <=(NB_ROUND))then
-  	n_key <= SHT_ZEROS & cr_key((WORD_SIZE*WORDS_NB)-1 downto WORD_SIZE);
+ --elsif (count>=(NB_ROUND-WORDS_NB) and count <=(NB_ROUND))then
+  --	n_key <= SHT_ZEROS & cr_key((WORD_SIZE*WORDS_NB)-1 downto WORD_SIZE);
  end if; 
 
 end process key_gen;
@@ -107,13 +110,12 @@ r_data<= (others => '-');
 n_data <= cr_data;
 
 
-	if (count < NB_ROUND or count = NB_ROUND  ) then
+	if (count < NB_ROUND ) then
   s1_data<=cr_data(DATA_SIZE-2 downto WORD_SIZE)& cr_data(DATA_SIZE-1); -- shift 1 de data
   s8_data<=cr_data(DATA_SIZE-9 downto WORD_SIZE)& cr_data(DATA_SIZE-1 downto DATA_SIZE-8); 
   s2_data<=cr_data(DATA_SIZE-3 downto WORD_SIZE)& cr_data(DATA_SIZE-1 downto DATA_SIZE-2);
   r_data<= ( ( ( (s1_data and s8_data) xor cr_data(WORD_SIZE-1 downto 0) ) xor s2_data) xor cr_key(WORD_SIZE-1 downto 0) );
   n_data<= r_data & cr_data(DATA_SIZE-1 downto WORD_SIZE);
-
 
 	end if;
 end process;

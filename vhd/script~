@@ -6,3 +6,5 @@ vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/round.vhd
 vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/counter.vhd
 vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/Top.vhd
 
+
+

@@ -5,7 +5,7 @@ library IEEE;
 library lib_simon;
  use lib_simon.const_def.all;
  use lib_simon.top;
-  use lib_simon.round;
+ use lib_simon.round;
  use lib_simon.counter;
 
 
@@ -47,7 +47,8 @@ begin
  s_plaintext<=x"656b696c20646e75";
  wait for 500 ns;
  s_nrst<='1';
-
+ wait for 1000 ns;
+  s_nrst<='0';
  wait ;
 end process;
 

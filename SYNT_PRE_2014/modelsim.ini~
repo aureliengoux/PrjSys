@@ -60,6 +60,10 @@ others = $MODEL_TECH/../modelsim.ini
 ;
 ; AutoLibMapping = 0
 
+simprim = ${XILINX}/vhdl/lib/${SIMPRIMVER}/simprim
+unisim = ${XILINX}/vhdl/lib/${SIMPRIMVER}/unisim
+XilinxCoreLib = ${XILINX}/vhdl/lib/${SIMPRIMVER}/xilinxcorelib
+
 lib_synth = /tp/xph3app/xph3app605//Projet_sys_complexe/SYNT_PRE_2014/lib_synth
 lib_bench = /tp/xph3app/xph3app605//Projet_sys_complexe/SYNT_PRE_2014/lib_bench
 [DefineOptionset]

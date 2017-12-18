@@ -3,7 +3,7 @@ library IEEE;
  use IEEE.std_logic_unsigned.all;
  use IEEE.numeric_std.all;
 library lib_simon;
- use lib_simon.const_def.all;
+ --use lib_simon.const_def.all;
  use lib_simon.top;
  use lib_simon.round;
  use lib_simon.counter;

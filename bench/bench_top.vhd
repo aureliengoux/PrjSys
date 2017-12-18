@@ -20,11 +20,7 @@ architecture tb of tb_top is
       key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 			plaintext: in std_logic_vector(DATA_SIZE-1 downto 0); 
       ciphertext: out std_logic_vector (DATA_SIZE-1 downto 0)
-<<<<<<< HEAD
     );
-=======
-     );
->>>>>>> 332d0a175e915414161ebec0dae9c780462fef78
 end component;
 
 	signal  s_clk :  std_logic:='0';
@@ -48,11 +44,8 @@ DUT: top port map (s_clk,s_nrst,s_key_i,s_plaintext,s_ciphertext);
 	 	s_plaintext<=x"656b696c20646e75";
 		wait for 500 ns;
 		s_nrst<='1';
-<<<<<<< HEAD
     wait for 200 ns;
     assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error; 
-=======
->>>>>>> 332d0a175e915414161ebec0dae9c780462fef78
 	 	wait for 1000 ns;
 		s_nrst<='0';
 	 	wait ;

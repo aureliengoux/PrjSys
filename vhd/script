@@ -1,10 +1,10 @@
-rm -r $HOME/Projet_sys_complexe/vhd/lib_simon
+rm -r $HOME/Projet_sys_complexe/vhd_rst_asyn/lib_simon
 vlib lib_simon
-vmap lib_simon $HOME/Projet_sys_complexe/vhd/lib_simon
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/const.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/round.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/counter.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/Top.vhd
+vmap lib_simon $HOME/Projet_sys_complexe/vhd_rst_asyn/lib_simon
+vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd_rst_asyn/const.vhd
+vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd_rst_asyn/round.vhd
+vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd_rst_asyn/counter.vhd
+vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd_rst_asyn/Top.vhd
 
 
 

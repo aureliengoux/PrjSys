@@ -20,7 +20,7 @@ architecture tb of tb_top is
       key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 			plaintext: in std_logic_vector(DATA_SIZE-1 downto 0); 
       ciphertext: out std_logic_vector (DATA_SIZE-1 downto 0)
-     );
+    );
 end component;
 
 	signal  s_clk :  std_logic:='0';

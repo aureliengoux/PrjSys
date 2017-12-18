@@ -13,7 +13,7 @@
 # //
 vsim lib_bench_simon.tb_top
 # vsim lib_bench_simon.tb_top 
-# Start time: 09:10:55 on Dec 14,2017
+# Start time: 08:40:09 on Dec 18,2017
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
@@ -26,13 +26,11 @@ vsim lib_bench_simon.tb_top
 # Loading lib_simon.top(rtl_top)#1
 # Loading lib_simon.round(rtl_round)#1
 # Loading lib_simon.counter(rtl_counter)#1
-add wave -position end  sim:/tb_top/DUT/clk
-add wave -position end  sim:/tb_top/DUT/nrst
-add wave -position end  sim:/tb_top/DUT/key_i
-add wave -position end  sim:/tb_top/DUT/plaintext
-add wave -position end  sim:/tb_top/DUT/ciphertext
-add wave -position end  sim:/tb_top/DUT/s_count
-add wave -position end  sim:/tb_top/DUT/s_done
+add wave -position end  sim:/tb_top/s_clk
+add wave -position end  sim:/tb_top/s_nrst
+add wave -position end  sim:/tb_top/s_key_i
+add wave -position end  sim:/tb_top/s_plaintext
+add wave -position end  sim:/tb_top/s_ciphertext
 run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
@@ -52,12 +50,55 @@ run
 run
 run
 run
+# ** Error:  FATAL ERROR: ciphertext_error.
+#    Time: 700 ns  Iteration: 0  Instance: /tb_top
+run
+run
+run
+add wave -position end  sim:/tb_top/DUT/round_map/clk
+add wave -position end  sim:/tb_top/DUT/round_map/nrst
+add wave -position end  sim:/tb_top/DUT/round_map/done
+add wave -position end  sim:/tb_top/DUT/round_map/count
+add wave -position end  sim:/tb_top/DUT/round_map/key_i
+add wave -position end  sim:/tb_top/DUT/round_map/data_in
+add wave -position end  sim:/tb_top/DUT/round_map/data_out
+add wave -position end  sim:/tb_top/DUT/round_map/cr_key
+add wave -position end  sim:/tb_top/DUT/round_map/n_key
+add wave -position end  sim:/tb_top/DUT/round_map/cr_data
+add wave -position end  sim:/tb_top/DUT/round_map/n_data
+add wave -position end  sim:/tb_top/DUT/round_map/zji
+add wave -position end  sim:/tb_top/DUT/round_map/msb_key
+add wave -position end  sim:/tb_top/DUT/round_map/s3_key
+add wave -position end  sim:/tb_top/DUT/round_map/s3xorkey
+add wave -position end  sim:/tb_top/DUT/round_map/s1_key
+add wave -position end  sim:/tb_top/DUT/round_map/key_temp1
+add wave -position end  sim:/tb_top/DUT/round_map/key_temp2
+add wave -position end  sim:/tb_top/DUT/round_map/r_key
+add wave -position end  sim:/tb_top/DUT/round_map/s1_data
+add wave -position end  sim:/tb_top/DUT/round_map/s8_data
+add wave -position end  sim:/tb_top/DUT/round_map/s2_data
+add wave -position end  sim:/tb_top/DUT/round_map/r_data
+restart
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
 run
 run
 run
 run
 run
 run
+# ** Error:  FATAL ERROR: ciphertext_error.
+#    Time: 700 ns  Iteration: 0  Instance: /tb_top
 run
-# End time: 09:11:27 on Dec 14,2017, Elapsed time: 0:00:32
-# Errors: 0, Warnings: 6

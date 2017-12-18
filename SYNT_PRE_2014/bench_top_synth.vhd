@@ -50,6 +50,8 @@ begin
  s_plaintext<=x"656b696c20646e75";
  wait for 500 ns;
  s_nrst<='1';
+ wait for 200 ns;
+ assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error; 
  wait for 1000 ns;
   s_nrst<='0';
  wait ;

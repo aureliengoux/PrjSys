@@ -1,0 +1,97 @@
+//  Precision RTL Synthesis 2014a.1_64-bit (Production Release) Mon Feb 24 02:39:08 PST 2014
+//  
+//  Copyright (c) Mentor Graphics Corporation, 1996-2014, All Rights Reserved.
+//             Portions copyright 1991-2008 Compuware Corporation
+//                       UNPUBLISHED, LICENSED SOFTWARE.
+//            CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
+//          PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+//  
+//  Running on Linux xph3app605@cimeld07 #1 SMP Debian 3.2.81-2 3.2.0-4-amd64 x86_64
+//  
+//  Start time Thu Dec 14 09:12:39 2017
+
+-- Device: Xilinx - SPARTAN3 : 3s200ft256 : 5
+-- CTE report summary..
+-- POST-SYNTHESIS TIMING REPORTS ARE ESTIMATES AND SHOULD NOT BE RELIED ON TO MAKE QoR DECISIONS. For accurate timing information, please run place-and-route (P&R) and review P&R generated timing reports.
+
+================================================================================================
+                   Clock Frequency Report
+
+	Domain                  Clock Name                            Min Period (Freq)             Required Period (Freq)
+	------                  ----------                            -----------------             ----------------------
+	ClockDomain0            clk                                   4.324 (231.267 MHz)           20.000 (50.000 MHz)
+
+
+================================================================================================
+Setup Timing Analysis of clk
+
+Setup Slack Path Summary
+
+               Data                                                                                            Data
+       Setup   Path   Source  Dest.                                                                            End 
+Index  Slack   Delay  Clock   Clock                Data Start Pin                        Data End Pin          Edge
+-----  ------  -----  ------  -----  -------------------------------------------  ---------------------------  ----
+  1    15.676  4.115  clk     clk    counter_map_modgen_counter_count_reg_q(2)/C  round_map/reg_cr_key(96)/D   Fall
+  2    15.686  4.105  clk     clk    counter_map_modgen_counter_count_reg_q(3)/C  round_map/reg_cr_key(96)/D   Fall
+  3    15.707  4.084  clk     clk    counter_map_modgen_counter_count_reg_q(4)/C  round_map/reg_cr_key(96)/D   Fall
+  4    16.126  3.665  clk     clk    counter_map_modgen_counter_count_reg_q(0)/C  round_map/reg_cr_key(96)/D   Rise
+  5    16.136  3.655  clk     clk    counter_map_modgen_counter_count_reg_q(1)/C  round_map/reg_cr_key(96)/D   Rise
+  6    16.186  3.605  clk     clk    round_map/reg_cr_key(33)/C                   round_map/reg_cr_key(96)/D   Rise
+  7    16.189  3.602  clk     clk    round_map/reg_cr_key(0)/C                    round_map/reg_cr_key(96)/D   Rise
+  8    16.616  3.175  clk     clk    counter_map_reg_done/C                       round_map/reg_cr_key(96)/D   Fall
+  9    16.616  3.175  clk     clk    counter_map_modgen_counter_count_reg_q(5)/C  round_map/reg_cr_key(96)/D   Fall
+ 10    17.044  2.747  clk     clk    round_map/reg_cr_data(56)/C                  round_map/reg_cr_data(58)/D  Rise
+
+                  CTE Path Report
+
+
+Critical path #1, (path slack = 15.676):
+
+SOURCE CLOCK: name: clk period: 20.000000
+     Times are relative to the 1st rising edge
+  DEST CLOCK: name: clk period: 20.000000
+     Times are relative to the 2nd rising edge
+
+NAME                                           GATE      DELAY    ARRIVAL DIR  FANOUT
+counter_map_modgen_counter_count_reg_q(2)/C FDC                   0.000   up
+counter_map_modgen_counter_count_reg_q(2)/Q FDC         0.626     0.626   up
+s_count(2)                                  (net)       0.411                  10
+ix22393z1548/I2                             LUT3                  1.037   up
+ix22393z1548/O                              LUT3        0.529     1.566   up
+nx22393z1                                   (net)       0.572                  97
+round_map/ix46033z1335/I2                   LUT3                  2.138   up
+round_map/ix46033z1335/O                    LUT3        0.529     2.667   dn
+round_map/nx46033z1                         (net)       0.572                 128
+round_map/ix2170z8995/I3                    LUT4                  3.239   dn
+round_map/ix2170z8995/O                     LUT4        0.529     3.768   dn
+round_map/nx2170z2                          (net)       0.347                   1
+round_map/reg_cr_key(96)/D                  FDCP                  4.115   dn
+
+		Initial edge separation:     20.000
+		Source clock delay:      -    1.359
+		Dest clock delay:        +    1.359
+		                        -----------
+		Edge separation:             20.000
+		Setup constraint:        -    0.209
+		                        -----------
+		Data required time:          19.791
+		Data arrival time:       -    4.115   ( 53.78% cell delay, 46.22% net delay )
+		                        -----------
+		Slack:                       15.676
+
+
+
+================================================================================================
+                   Input Delay Report
+
+	Input                  Clock Name                            Slack (ns)
+	-----                  ----------                            ----------
+	No input delay constraints.
+
+
+================================================================================================
+                   Output Delay Report
+
+	Output                 Clock Name                            Slack (ns)
+	------                 ----------                            ----------
+	No output delay constraints.

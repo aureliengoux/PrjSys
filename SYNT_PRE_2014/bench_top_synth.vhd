@@ -10,8 +10,8 @@ library IEEE;
 
 library lib_synth;
 use lib_synth.const_def.all; 
---use lib_synth.round;
---use lib_synth.top;
+use lib_synth.round;
+use lib_synth.top;
 
 entity tb_top is 
 end tb_top;

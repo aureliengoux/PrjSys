@@ -9,11 +9,13 @@ entity round is
   port(
 	 	clk : in std_logic;
 		nrst: in std_logic;
+    start: in std_logic;
 		done: in std_logic;
 		count: in std_logic_vector(5 downto 0); 
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 		data_in: in std_logic_vector(DATA_SIZE-1 downto 0); 
-   	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)	
+   	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
+    --done: out std_logic	
 	);
 end round;
 
@@ -37,30 +39,29 @@ architecture rtl_round of round is
 	signal s8_data: std_logic_vector(WORD_SIZE-1 downto 0); -- 8 bit left rotation of left half of data
 	signal s2_data: std_logic_vector(WORD_SIZE-1 downto 0); -- 2 bit left rotation of left half of data
 	signal r_data: std_logic_vector(WORD_SIZE-1 downto 0); -- round data
+  
 
 begin 
 	--process for registers update
 	synchro: process(clk,nrst)
 	begin
 		if (nrst='0')then -- asynchronous low level reset
-			cr_key<=key_i; -- master key loaded in key register (write)
-		 	cr_data<=data_in; -- plaintext loaded in data register (write)
-		 	data_out<= (others =>'0'); -- reset round output (write)
-
-		elsif (clk'event and clk='1') then --rising edge
-		 	cr_key<=n_key;	--new round key loaded in key register (write)
-		 	cr_data<=n_data; --new round data loaded in data register (write)
-		  
-			-- We are still wondering if this is a good practice
-		 	if (count = NB_ROUND) then 
-		  	data_out <= cr_data; --data register loaded in round output(read)
-		 	end if;     
-
+			cr_key<= key_i; -- master key loaded in key register (write)
+		 	cr_data<= data_in; -- plaintext loaded in data register (write)	
+		elsif (clk'event and clk='1') then --rising edge     
+      if (start='1') then 
+      	cr_key<=key_i; -- master key loaded in key register (write)
+		 		cr_data<=data_in; -- plaintext loaded in data register (write)       
+      else 
+		 		cr_key<=n_key;	--new round key loaded in key register (write)
+		 		cr_data<=n_data; --new round data loaded in data register (write)        
+      
+      end if;
 		end if; 
 	end process synchro;
 
 	--
-	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3xorkey,s1_key,done,key_temp1,key_temp2,r_key)
+	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3xorkey,s1_key,key_temp1,key_temp2,r_key,start)
 	begin
 		--assignations for debug : traces
 	 	--n_key <= cr_key;
@@ -71,7 +72,7 @@ begin
 	 	--s3_key <= (others => '-');
 	 	--s3xorkey <= (others => '-');
 	 	--s1_key <= (others => '-');
-		if (count < (NB_ROUND) and done = '0')then
+		if (count < (NB_ROUND))then
 			msb_key <= cr_key(KEY_SIZE-1 downto (WORD_SIZE*(WORDS_NB-1))); --gets the 32 most significant bits
 			s3_key <= msb_key(2 downto 0)&msb_key(WORD_SIZE-1 downto 3); -- right rotation (3 bits)
 			s3xorkey <= s3_key xor cr_key((WORD_SIZE*2)-1 downto WORD_SIZE); -- xor with 2nd word of current key (32-63) 
@@ -96,24 +97,29 @@ begin
 	end process key_gen;
 
 	--
-	data_path : process(cr_data,count,cr_key,r_data,s2_data,s8_data, s1_data,done)
+	data_path : process(cr_data,count,cr_key,r_data,s2_data,s8_data, s1_data,start)
 	begin
-		r_data<= (others => '-');
-		n_data <= cr_data;
+	
+		data_out <= cr_data;
 
-		if (count < NB_ROUND and done = '0' ) then
+		if (count < NB_ROUND) then			
 			s1_data<=cr_data(DATA_SIZE-2 downto WORD_SIZE)& cr_data(DATA_SIZE-1); 
 			s8_data<=cr_data(DATA_SIZE-9 downto WORD_SIZE)& cr_data(DATA_SIZE-1 downto DATA_SIZE-8); 
 			s2_data<=cr_data(DATA_SIZE-3 downto WORD_SIZE)& cr_data(DATA_SIZE-1 downto DATA_SIZE-2);
 			r_data<= ( ( ( (s1_data and s8_data) xor cr_data(WORD_SIZE-1 downto 0) ) xor s2_data) xor cr_key(WORD_SIZE-1 downto 0) );--calculate round_data
 			n_data<= r_data & cr_data(DATA_SIZE-1 downto WORD_SIZE); -- switch left half and right half data
-  	else     
-		--assignation of all signals in all branches to avoid latches
+  	else    
+		--assignation of all signals in all branches to avoid latches      
 			s1_data<=(others => '0');
 			s8_data<=(others => '0');
 			s2_data<=(others => '0');
-			r_data<= (others => '0');  
-		end if;
+			n_data<= cr_data;   
+			r_data<= (others => '0'); 
+			
+		end if;	
 	end process;
+
+
+
 end rtl_round;
 

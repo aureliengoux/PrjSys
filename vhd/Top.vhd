@@ -12,9 +12,11 @@ entity top is
 	port (
   	clk : in std_logic;
 		nrst: in std_logic;	
+    start: in std_logic;    
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 		plaintext: in std_logic_vector(DATA_SIZE-1 downto 0); 
-    ciphertext: out std_logic_vector (DATA_SIZE-1 downto 0)
+    ciphertext: out std_logic_vector (DATA_SIZE-1 downto 0);
+    done : out std_logic
   );
 end top;
 
@@ -23,17 +25,22 @@ architecture rtl_top of top is
         clk : in std_logic;
 				nrst: in std_logic;
 				done: in std_logic;
+        start: in std_logic;
 				count: in std_logic_vector(5 downto 0);
         key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 				data_in: in std_logic_vector(DATA_SIZE-1 downto 0); 
-        data_out: out std_logic_vector (DATA_SIZE-1 downto 0));
+        data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
+        --done: out std_logic
+        );
+        
 	end component;
 
 	component counter port (
         clk	: in std_logic;
-        nrst: in std_logic;
-   			done : out std_logic;
-				count : out std_logic_vector(5 downto 0));
+        nrst: in std_logic;       
+   			start : in std_logic;
+				count : out std_logic_vector(5 downto 0);
+        done  : out std_logic);
 	end component;
 
 	signal s_count: std_logic_vector (5 downto 0);
@@ -43,18 +50,22 @@ begin
 	round_map: round PORT MAP (
 		clk=>clk,
     nrst=>nrst,
+    start=>start,
     done => s_done,
 		count=>s_count,
 		key_i=>key_i,
     data_in=>plaintext,
     data_out=>ciphertext
+    --done => done
 	);
 
 	counter_map: counter PORT MAP (
 		clk=>clk,
-		nrst=>nrst,
-    done => s_done,
-	  count=>s_count
-	); 
+		nrst=>nrst,    
+    start=>start,
+	  count=>s_count,
+    done => s_done  
+	);
 
+  done<=s_done;
 end rtl_top;

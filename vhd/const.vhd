@@ -8,7 +8,7 @@ package const_def is
 	constant WORDS_NB  : integer := 4;										-- m 
 	constant WORD_SIZE : integer := DATA_SIZE/2 ; 				-- n
   constant KEY_SIZE  : integer := WORD_SIZE * WORDS_NB;	-- m*n
-	constant NB_ROUND  : integer :=  44;								
+	constant NB_ROUND  : integer := 44;								
 
 	-- Key schedule encryption
   constant ROUND_CONST: std_logic_vector(31 downto 0):= X"fffffffc"; -- constant "c" for key schedule (see figure)

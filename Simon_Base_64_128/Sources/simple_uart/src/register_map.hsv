@@ -1,0 +1,32 @@
+localparam REG_PTEXT_0   = 7'h00;
+localparam REG_PTEXT_1   = 7'h01;
+localparam REG_PTEXT_2   = 7'h02;
+localparam REG_PTEXT_3   = 7'h03;
+localparam REG_PTEXT_4   = 7'h04;
+localparam REG_PTEXT_5   = 7'h05;
+localparam REG_PTEXT_6   = 7'h06;
+localparam REG_PTEXT_7   = 7'h07;
+
+localparam REG_CIPHER_0  = 7'h08;
+localparam REG_CIPHER_1  = 7'h09;
+localparam REG_CIPHER_2  = 7'h0a;
+localparam REG_CIPHER_3  = 7'h0b;
+localparam REG_CIPHER_4  = 7'h0c;
+localparam REG_CIPHER_5  = 7'h0d;
+localparam REG_CIPHER_6  = 7'h0e;
+localparam REG_CIPHER_7  = 7'h0f;
+
+localparam REG_KEY_00    = 7'h10;
+localparam REG_KEY_01    = 7'h11;
+localparam REG_KEY_02    = 7'h12;
+localparam REG_KEY_03    = 7'h13;
+localparam REG_KEY_04    = 7'h14;
+localparam REG_KEY_05    = 7'h15;
+localparam REG_KEY_06    = 7'h16;
+localparam REG_KEY_07    = 7'h17;
+localparam REG_KEY_08    = 7'h18;
+localparam REG_KEY_09    = 7'h19;
+localparam REG_KEY_10    = 7'h1a;
+localparam REG_KEY_11    = 7'h1b;
+
+localparam REG_START     = 7'h40;

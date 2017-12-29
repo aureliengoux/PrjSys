@@ -11,7 +11,7 @@ entity round is
 		nrst: in std_logic;
     start: in std_logic;
 		done: in std_logic;
-		count: in std_logic_vector(5 downto 0); 
+		count: in std_logic_vector(6 downto 0); 
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 		data_in: in std_logic_vector(DATA_SIZE-1 downto 0);
    	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)

@@ -1,7 +1,16 @@
-rm -r $HOME/Projet_sys_complexe/vhd/lib_simon
+#rm -r $HOME/Projet_sys_complexe/vhd/lib_simon
+#vlib lib_simon
+#vmap lib_simon $HOME/Projet_sys_complexe/vhd/lib_simon
+#vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/const_32_64.vhd
+#vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/round_32_64.vhd
+#vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/counter.vhd
+#vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/Top.vhd
+
+
+rm _r ./lib_simon
 vlib lib_simon
-vmap lib_simon $HOME/Projet_sys_complexe/vhd/lib_simon
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/const_32_64.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/round_32_64.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/counter.vhd
-vcom +acc -work lib_simon  $HOME/Projet_sys_complexe/vhd/Top.vhd
+vmap lib_simon ./lib_simon
+vcom +acc -work lib_simon  ./const_32_64.vhd
+vcom +acc -work lib_simon  ./round_32_64.vhd
+vcom +acc -work lib_simon  ./counter.vhd
+vcom +acc -work lib_simon  ./Top.vhd

@@ -22,7 +22,14 @@ end const_def;\n"
 	return  strLibraries+strPackage
 		
 
-def roundFile(wNb):
+def roundFile(wNb,rNb):
+	if rNb > 64 :
+		cSize = 7		
+	elif rNb > 32:
+		cSize = 6
+	else:
+		cSize = 5
+
 	strLibraries = "library IEEE;\n\
 	use IEEE.std_logic_1164.all;\n\
 	use IEEE.std_logic_unsigned.all;\n\
@@ -37,7 +44,7 @@ library lib_simon;\n\
 		nrst: in std_logic;\n\
     start: in std_logic;\n\
 		done: in std_logic;\n\
-		count: in std_logic_vector(5 downto 0); \n\
+		count: in std_logic_vector("+str(cSize)+" downto 0); \n\
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	\n\
 		data_in: in std_logic_vector(DATA_SIZE-1 downto 0);\n\
    	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)\n\
@@ -168,7 +175,6 @@ end rtl_round;\n"
 	return strLibraries+strEntity+strArchi+strSynchroProc+strKeyProc+strDataProc
 
 def counterFile(rNb):
-
 	if rNb > 64 :
 		cSize = 7
 		reset = "0000000"
@@ -231,8 +237,14 @@ end rtl_counter;\n"
 
 	return strLibraries+strEntity+strArchi
 
-def topFile():
-
+def topFile(rNb):
+	if rNb > 64 :
+		cSize = 7		
+	elif rNb > 32:
+		cSize = 6
+	else:
+		cSize = 5
+			
 	strLibraries = "library IEEE;\n\
 	use IEEE.std_logic_1164.all;\n\
 	use IEEE.std_logic_unsigned.all;\n\
@@ -262,26 +274,22 @@ end top;\n\
 				nrst: in std_logic;\n\
 				done: in std_logic;\n\
         start: in std_logic;\n\
-				count: in std_logic_vector(5 downto 0);\n\
+				count: in std_logic_vector("+str(cSize)+" downto 0);\n\
         key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	\n\
 				data_in: in std_logic_vector(DATA_SIZE-1 downto 0); \n\
         data_out: out std_logic_vector (DATA_SIZE-1 downto 0)\n\
         --done: out std_logic\n\
         );\n\
-        \n\
 	end component;\n\
 \n"
 
-	strCompCount = "component counter port (\n\
+	strCompCount = "	component counter port (\n\
         clk	: in std_logic;\n\
         nrst: in std_logic;\n\
    			start : in std_logic;\n\
-				count : out std_logic_vector(5 downto 0);\n\
-        done  : out std_logic);\n\
+				count : out std_logic_vector("+str(cSize)+" downto 0);\n\
+ 				done  : out std_logic);\n\
 	end component;\n\
-\n\
-	signal s_count: std_logic_vector (5 downto 0);\n\
-	signal s_done : std_logic;\n\
 \n"
 
 	strMap = "begin \n\
@@ -309,3 +317,46 @@ end top;\n\
 end rtl_top;\n"
 
 	return strLibraries+strEntity+strCompRound+strCompCount+strMap
+
+def benchFile():
+	return tools.myRead("../Simon_Base_64_128/bench/bench_top.vhd")
+
+def benchSynthFile():
+	return tools.myRead("../Simon_Base_64_128/SYNT_PRE_2014/bench_top_synth.vhd")
+
+def compileVHD():
+	strScript = "rm _r ./lib_simon\n\
+\n\
+vlib lib_simon\n\
+vmap lib_simon ./lib_simon\n\
+\n\
+vcom +acc -work lib_simon  ./const.vhd\n\
+vcom +acc -work lib_simon  ./round.vhd\n\
+vcom +acc -work lib_simon  ./counter.vhd\n\
+vcom +acc -work lib_simon  ./Top.vhd"
+	return strScript
+
+def compileBench():
+	strScript = "cd ../vhd/\n\
+./script\n\
+cd ../bench\n\
+\n\
+rm -r ./lib_bench_simon\n\
+vlib lib_bench_simon\n\
+vmap lib_bench_simon ./lib_bench_simon\n\
+\n\
+vcom +acc -work lib_bench_simon  ./bench_top.vhd"
+	return strScript
+
+def compileSynth():
+	strScript = "rm -r ./lib_synth\n\
+vlib lib_synth\n\
+vmap lib_synth ./lib_synth\n\
+#vcom +acc -work lib_synth  ../vhd/const.vhd\n\
+vcom +acc -work lib_synth  ./simon_synth_impl_1/top.vhd\n\
+\n\
+rm -r ./lib_bench\n\
+vlib lib_bench\n\
+vmap lib_bench ./lib_bench\n\
+vcom +acc -work lib_bench ./bench_top_synth.vhd"
+	return strScript

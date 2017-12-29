@@ -31,19 +31,15 @@ architecture rtl_top of top is
         data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
         --done: out std_logic
         );
-        
 	end component;
 
-component counter port (
+	component counter port (
         clk	: in std_logic;
         nrst: in std_logic;
    			start : in std_logic;
 				count : out std_logic_vector(5 downto 0);
-        done  : out std_logic);
+ 				done  : out std_logic);
 	end component;
-
-	signal s_count: std_logic_vector (5 downto 0);
-	signal s_done : std_logic;
 
 begin 
 	round_map: round PORT MAP (

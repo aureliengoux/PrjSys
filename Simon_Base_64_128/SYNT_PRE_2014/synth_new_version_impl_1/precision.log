@@ -1,0 +1,4 @@
+# Info: [9566]: Logging project transcript to file /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014/synth_new_version_impl_1/precision.log
+# Info: [9566]: Logging suppressed messages transcript to file /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014/synth_new_version_impl_1/precision.log.suppressed
+# Info: [9550]: Activated implementation synth_new_version_impl_1 in project /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014/synth_new_version.psp.
+new_project -name synth_new_version -folder /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014 -createimpl_name synth_new_version_impl_1

@@ -1,4 +1,4 @@
-import tools
+import tools, params
 import generate, substitute
 import os, os.path
 from os import path

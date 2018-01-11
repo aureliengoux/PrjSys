@@ -5,17 +5,17 @@ def constFile(dSize, wNb, rNb, z):
 	constFile = tools.substituteString(r" 64;", r" " + str(dSize) +";",constFile)
 	constFile = tools.substituteString(r" 4;", r" " + str(wNb) +";",constFile)
 	constFile = tools.substituteString(r" 44;",r" "+ str(rNb) +";",constFile)
-	constFile = tools.substituteString(r"\"(?P<dSize>\d+)\";",r"\"" + str(z) +"\";",constFile)
+	constFile = tools.substituteString("\"(?P<dSize>\d+)\";", "\"" + str(z) +"\";",constFile)
 
 	return constFile
 	
 def roundFile(wNb,rNb):
 	if rNb > 64 :
-		cSize = 7		
+		cSize = 6		
 	elif rNb > 32:
-		cSize = 6
-	else:
 		cSize = 5
+	else:
+		cSize = 4
 
 	roundFile = tools.myRead("../Simon_Base_64_128/vhd/round.vhd")
 	roundFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", roundFile)
@@ -27,19 +27,19 @@ def roundFile(wNb,rNb):
 
 def counterFile(rNb):
 	if rNb > 64 :
-		cSize = 7
+		cSize = 6
 		reset = "0000000"
 		incr = "0000001"
 	elif rNb > 32:
-		cSize = 6
+		cSize = 5
 		reset = "000000"
 		incr = "000001"
 	else:
-		cSize = 5
+		cSize = 4
 		reset = "00000"
 		incr = "00001"
 
-	counterFile = tools.myRead("../Simon_Base_64_128/vhd/counter.vhd")
+	counterFile = tools.myRead("../Simon_Base_64_128/vhd/counter_process.vhd")
 	counterFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", counterFile)
 	counterFile = tools.substituteString(r"\"(?P<dSize>\d+)\"0",r"\"" + str(reset) +"\";",counterFile)
 	counterFile = tools.substituteString(r"\"(?P<dSize>\d+)\"1",r"\"" + str(incr) +"\";",counterFile)
@@ -48,11 +48,11 @@ def counterFile(rNb):
 
 def topFile(rNb):
 	if rNb > 64 :
-		cSize = 7		
+		cSize = 6		
 	elif rNb > 32:
-		cSize = 6
-	else:
 		cSize = 5
+	else:
+		cSize = 4
 
 	topFile = tools.myRead("../Simon_Base_64_128/vhd/Top.vhd")
 	topFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", topFile)

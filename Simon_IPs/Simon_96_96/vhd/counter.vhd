@@ -16,29 +16,36 @@ entity counter is
    );
 end counter;
 
-architecture rtl_counter of counter is
-	signal val: std_logic_vector(5 downto 0); --signal for read and write count value
+architecture rtl_counter of counter is 
+signal n_val,cr_val: std_logic_vector (5 downto 0);
 
+begin 
+synchro: process (clk,nrst)
 begin
-	process(clk,nrst)      
-  begin
-  	if (nrst = '0')  then -- asynchronous low level reset
-	  	val <= "000000";		-- reset counter
-     	done <= '0';				-- lower flag
-    elsif clk'event and clk = '1' then  	    
-     if (start ='1')then  
-      	val <= "000000"; 	
-        done <='0';  		 	-- drop flag
-      elsif  (val >= NB_ROUND )then        	  
-       	val<=val; 
-        done <='1'; --rise flag 
-       else
-      	 val <= val + "000001"; --count
-         done <='0';	
-       end if;   
-    end if;
-  end process;
+ if (nrst ='0')then 
+    cr_val <= "000000";
+ elsif (clk'event and clk='1') then --rising edge 
+   cr_val <= n_val;
+ end if; 
+end process synchro; 
 
-  count <= val; 			--concurrential update of count output
 
-end rtl_counter;
+counting:process (start,cr_val)
+begin
+count<=cr_val;
+	if (start = '1') then
+					n_val<="000000";
+					done <= '0';
+	elsif  (cr_val >= NB_ROUND )then        	  
+		     	n_val<=cr_val; 
+		      done <='1'; --rise flag 
+	else
+					 n_val <= cr_val + "000001"; 
+		       done <='0';	
+	end if;
+
+end process counting;
+
+
+
+end rtl_counter; 

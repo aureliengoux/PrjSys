@@ -26,8 +26,8 @@ architecture rtl_round of round is
 	signal zji: std_logic_vector(WORD_SIZE-1 downto 0); -- key encryption with "c" and "z" sequence constants 
 	signal msb_key: std_logic_vector(WORD_SIZE-1 downto 0); --current key 4th word (96-127)
 	signal s3_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 3 bits right rotation of msb_key 
-	signal s3_key: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 2nd current key word (32-63)
-	signal s1_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 1 bit right rotation of s3_key
+	signal s3xorkey: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 2nd current key word (32-63)
+	signal s1_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 1 bit right rotation of s3xorkey
 	signal key_temp1: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 1st current key word (0-31)
 	signal key_temp2: std_logic_vector(WORD_SIZE-1 downto 0); -- s1_key xor key_temp2
 	signal r_key: std_logic_vector(WORD_SIZE-1 downto 0); -- round key
@@ -58,13 +58,13 @@ begin
 		end if; 
 	end process synchro;
 
-	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3_key,s1_key,key_temp1,key_temp2,r_key)
+	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3xorkey,s1_key,key_temp1,key_temp2,r_key)
 	begin
 		if (count < (NB_ROUND))then
 			msb_key <= cr_key(KEY_SIZE-1 downto (WORD_SIZE*(WORDS_NB-1))); --gets the 32 most significant bits
 			s3_key <= msb_key(2 downto 0)&msb_key(WORD_SIZE-1 downto 3); -- right rotation (3 bits)
-			--s3_key <= s3_key xor cr_key((WORD_SIZE*2)-1 downto WORD_SIZE); -- xor with 2nd word of current key (32-63) 
-			s1_key <= (s3_key(0)& s3_key((WORD_SIZE-1) downto 1)); --right rotation (1 bits)
+			--s3xorkey <= s3_key xor cr_key((WORD_SIZE*2)-1 downto WORD_SIZE); -- xor with 2nd word of current key (32-63) 
+			s1_key <= (s3_key\(0)& s3_key\((WORD_SIZE-1) downto 1)); --right rotation (1 bits)
 			key_temp1 <= s3_key xor cr_key(WORD_SIZE-1 downto 0); -- xor with 1st word of current key (0-31)
 			key_temp2 <= key_temp1 xor s1_key;       
 			zji<=ROUND_CONST(WORD_SIZE-1 downto 1)& Z(to_integer(unsigned(count))); --"c" xor "z" (see key schedule figure)
@@ -74,7 +74,7 @@ begin
 			--assignation of all signals in all branches to avoid latches
 			msb_key <= (others => '0');
 		 	s3_key <= (others => '0');
-			--s3_key <= (others => '0');
+			--s3xorkey <= (others => '0');
 			s1_key <= (others => '0');
 			key_temp1 <= (others => '0');
 			key_temp2 <= (others => '0');      

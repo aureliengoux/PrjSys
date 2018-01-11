@@ -1,4 +1,4 @@
-from tkinter import *
+from Tkinter import *
 import tkinter.messagebox
 import tkinter.simpledialog
 

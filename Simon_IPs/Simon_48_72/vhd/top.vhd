@@ -1,66 +1,44 @@
 library IEEE;
 	use IEEE.std_logic_1164.all;
+	use IEEE.numeric_std.all;
 	use IEEE.std_logic_unsigned.all;
 	use IEEE.numeric_std.all;
 library lib_simon;
 	use lib_simon.const_def.all;
-	use lib_simon.round;
-	use lib_simon.counter;
 
-entity top is 
-	port (
-  	clk : in std_logic;
-		nrst: in std_logic;	
-    start: in std_logic;    
-    key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
-		plaintext: in std_logic_vector(DATA_SIZE-1 downto 0); 
-    ciphertext: out std_logic_vector (DATA_SIZE-1 downto 0);
-    done : out std_logic
-  );
-end top;
+entity counter is
+	port(	
+		clk	: in std_logic;
+    nrst: in std_logic;    
+    start  : in std_logic;	-- overflow flag
+		count : out std_logic_vector(6 downto 0); --count output
+	  done: out std_logic
+   );
+end counter;
 
-architecture rtl_top of top is 
-	component round port (
-        clk : in std_logic;
-				nrst: in std_logic;
-				done: in std_logic;
-        start: in std_logic;
-				count: in std_logic_vector(6 downto 0);
-        key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
-				data_in: in std_logic_vector(DATA_SIZE-1 downto 0); 
-        data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
-        --done: out std_logic
-        );
-	end component;
+architecture rtl_counter of counter is
+	signal val: std_logic_vector(6 downto 0); --signal for read and write count value
 
-	component counter port (
-        clk	: in std_logic;
-        nrst: in std_logic;
-   			start : in std_logic;
-				count : out std_logic_vector(6 downto 0);
- 				done  : out std_logic);
-	end component;
+begin
+	process(clk,nrst)      
+  begin
+  	if (nrst = '0')  then -- asynchronous low level reset
+	  	val <= "000000";		-- reset counter
+     	done <= '0';				-- lower flag
+    elsif clk'event and clk = '1' then  	    
+     if (start ='1')then  
+      	val <= "000000"; 	
+        done <='0';  		 	-- drop flag
+      elsif  (val >= NB_ROUND )then        	  
+       	val<=val; 
+        done <='1'; --rise flag 
+       else
+      	 val <= val + "000001"; --count
+         done <='0';	
+       end if;   
+    end if;
+  end process;
 
-begin 
-	round_map: round PORT MAP (
-		clk=>clk,
-    nrst=>nrst,
-    start=>start,
-    done => s_done,
-		count=>s_count,
-		key_i=>key_i,
-    data_in=>plaintext,
-    data_out=>ciphertext
-    --done => done
-	);
+  count <= val; 			--concurrential update of count output
 
-	counter_map: counter PORT MAP (
-		clk=>clk,
-		nrst=>nrst,    
-    start=>start,
-	  count=>s_count,
-    done => s_done  
-	);
-
-  done<=s_done;
-end rtl_top;
+end rtl_counter;

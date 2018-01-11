@@ -12,8 +12,8 @@ def myWrite(myString,filename):
 	file.write(myString)
 	file.close()
 
-#def substituteString(matchString,subsString,inputString):
-#	return re.sub(matchString,subsString,inputString)
+def substituteString(matchString,subsString,inputString):
+	return re.sub(matchString,subsString,inputString)
 
 def setIPparams(dataSize, keySize):
 	try:

@@ -44,8 +44,8 @@ def counterFile(rNb):
 
 	counterFile = tools.myRead("../Simon_Base_64_128/vhd/counter.vhd")
 	counterFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", counterFile)
-	counterFile = tools.substituteString("\"(?P<dSize>\d+)0\"","\"" + str(reset) +"\";",counterFile)
-	counterFile = tools.substituteString("\"(?P<dSize>\d+)1\"","\"" + str(incr) +"\";",counterFile)
+	counterFile = tools.substituteString("\"(?P<dSize>\d+)0\"","\"" + str(reset) +"\"",counterFile)
+	counterFile = tools.substituteString("\"(?P<dSize>\d+)1\"","\"" + str(incr) +"\"",counterFile)
 
 	return counterFile
 

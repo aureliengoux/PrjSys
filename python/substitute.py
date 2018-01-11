@@ -21,7 +21,8 @@ def roundFile(wNb,rNb):
 	roundFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", roundFile)
 	if wNb<4 :
 		roundFile = tools.substituteString(r"s3xorkey <=", r"--s3xorkey <=", roundFile)
-		roundFile = tools.substituteString(r"s3xorkey", r"s3_key", roundFile)
+		roundFile = tools.substituteString(r"s3xorkey\(", r"s3_key\(", roundFile)
+		roundFile = tools.substituteString(r"s3xorkey xor", r"s3_key xor", roundFile)
 
 	return roundFile
 
@@ -65,38 +66,40 @@ def benchFile():
 def benchSynthFile():
 	return tools.myRead("../Simon_Base_64_128/SYNT_PRE_2014/bench_top_synth.vhd")
 
-def compileVHD():
-	strScript = "rm _r ./lib_simon\n\
+def compileVHD(dSize,kSize):
+	strScript = "rm -r -f ./lib_simon\n\
 \n\
 vlib lib_simon\n\
-vmap lib_simon $HOME/Prj_Sys/Simon_IPs/vhd/lib_simon\n\
+vmap lib_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/vhd/lib_simon\n\
 \n\
 vcom +acc -work lib_simon  ./const.vhd\n\
 vcom +acc -work lib_simon  ./round.vhd\n\
 vcom +acc -work lib_simon  ./counter.vhd\n\
-vcom +acc -work lib_simon  ./Top.vhd"
+vcom +acc -work lib_simon  ./top.vhd"
 	return strScript
 
-def compileBench():
+def compileBench(dSize,kSize):
 	strScript = "cd ../vhd/\n\
-./script\n\
+./compile_vhd.sh\n\
 cd ../bench\n\
 \n\
-rm -r ./lib_bench_simon\n\
+rm -r -f ./lib_bench_simon\n\
 vlib lib_bench_simon\n\
+vmap lib_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/bench/lib_bench_simon\n\
 \n\
 vcom +acc -work lib_bench_simon  ./bench_top.vhd"
 	return strScript
 
-def compileSynth():
-	strScript = "rm -r ./lib_synth\n\
+def compileSynth(dSize,kSize):
+	strScript = "rm -r -f ./lib_synth\n\
+\n\
 vlib lib_synth\n\
-vmap lib_synth ./lib_synth\n\
+vmap lib_synth $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/synth/lib_synth\n\
 #vcom +acc -work lib_synth  ../vhd/const.vhd\n\
 vcom +acc -work lib_synth  ./simon_synth_impl_1/top.vhd\n\
 \n\
-rm -r ./lib_bench\n\
-vlib lib_bench\n\
-vmap lib_bench ./lib_bench\n\
-vcom +acc -work lib_bench ./bench_top_synth.vhd"
+rm -r ./lib_bench_synth\n\
+vlib lib_bench_synth\n\
+vmap lib_bench_synth $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/synth/lib_bench_synth\n\
+vcom +acc -work lib_bench_synth ./bench_top_synth.vhd"
 	return strScript

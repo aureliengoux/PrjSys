@@ -29,9 +29,9 @@ def createIP(dSize, kSize):
 		tools.myWrite(substitute.benchFile(), "../Simon_IPs/"+IPsimon+"/bench/bench_top.vhd")
 		tools.myWrite(substitute.benchSynthFile(), "../Simon_IPs/"+IPsimon+"/synth/bench_top_synth.vhd")
 
-		tools.myWrite(substitute.compileVHD(), "../Simon_IPs/"+IPsimon+"/vhd/compile_vhd.sh")
-		tools.myWrite(substitute.compileBench(), "../Simon_IPs/"+IPsimon+"/bench/compile_bench.sh")
-		tools.myWrite(substitute.compileSynth(), "../Simon_IPs/"+IPsimon+"/synth/compile_synth.sh")
+		tools.myWrite(substitute.compileVHD(dSize,kSize), "../Simon_IPs/"+IPsimon+"/vhd/compile_vhd.sh")
+		tools.myWrite(substitute.compileBench(dSize,kSize), "../Simon_IPs/"+IPsimon+"/bench/compile_bench.sh")
+		tools.myWrite(substitute.compileSynth(dSize,kSize), "../Simon_IPs/"+IPsimon+"/synth/compile_synth.sh")
 	else :
 		print "unavailable to write requested IP description"
 	

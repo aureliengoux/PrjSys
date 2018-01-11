@@ -20,8 +20,10 @@ def roundFile(wNb,rNb):
 	roundFile = tools.myRead("../Simon_Base_64_128/vhd/round.vhd")
 	roundFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", roundFile)
 	if wNb<4 :
+		roundFile = tools.substituteString(r"signal s3xorkey", r"--signal s3xorkey", roundFile)
+		roundFile = tools.substituteString(r"s3_key,s3xorkey,", r"s3_key,", roundFile)
 		roundFile = tools.substituteString(r"s3xorkey <=", r"--s3xorkey <=", roundFile)
-		roundFile = tools.substituteString(r"s3xorkey\(", r"s3_key\(", roundFile)
+		roundFile = tools.substituteString(r"s3xorkey\(", r"s3_key(", roundFile)
 		roundFile = tools.substituteString(r"s3xorkey xor", r"s3_key xor", roundFile)
 
 	return roundFile
@@ -85,7 +87,7 @@ cd ../bench\n\
 \n\
 rm -r -f ./lib_bench_simon\n\
 vlib lib_bench_simon\n\
-vmap lib_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/bench/lib_bench_simon\n\
+vmap lib_bench_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/bench/lib_bench_simon\n\
 \n\
 vcom +acc -work lib_bench_simon  ./bench_top.vhd"
 	return strScript

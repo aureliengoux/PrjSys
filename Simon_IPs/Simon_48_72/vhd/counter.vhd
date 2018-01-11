@@ -7,9 +7,9 @@ library lib_simon;
 	use lib_simon.const_def.all;
 
 entity counter is
-	port(
+	port(	
 		clk	: in std_logic;
-    nrst: in std_logic;
+    nrst: in std_logic;    
     start  : in std_logic;	-- overflow flag
 		count : out std_logic_vector(6 downto 0); --count output
 	  done: out std_logic
@@ -20,22 +20,22 @@ architecture rtl_counter of counter is
 	signal val: std_logic_vector(6 downto 0); --signal for read and write count value
 
 begin
-	process(clk,nrst)
+	process(clk,nrst)      
   begin
   	if (nrst = '0')  then -- asynchronous low level reset
 	  	val <= "000000";		-- reset counter
      	done <= '0';				-- lower flag
     elsif clk'event and clk = '1' then  	    
-     if (start ='1')then
-      	val <= "000000";
+     if (start ='1')then  
+      	val <= "000000"; 	
         done <='0';  		 	-- drop flag
       elsif  (val >= NB_ROUND )then        	  
-       	val<=val;
+       	val<=val; 
         done <='1'; --rise flag 
        else
       	 val <= val + "000001"; --count
-         done <='0';
-       end if;
+         done <='0';	
+       end if;   
     end if;
   end process;
 

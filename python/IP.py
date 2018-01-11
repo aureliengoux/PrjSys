@@ -1,5 +1,5 @@
 import tools
-import generate
+import generate, substitute
 import os, os.path
 from os import path
 
@@ -21,17 +21,17 @@ def createIP(dSize, kSize):
 		wNb = IPparams['wNb']
 		rNb = IPparams['rNb']
 		z = IPparams['z']
-		tools.myWrite(generate.constFile(dSize, wNb, rNb, z), "../Simon_IPs/"+IPsimon+"/vhd/const.vhd")
-		tools.myWrite(generate.roundFile(wNb,rNb), "../Simon_IPs/"+IPsimon+"/vhd/round.vhd")
-		tools.myWrite(generate.counterFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/counter.vhd")
-		tools.myWrite(generate.topFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/top.vhd")
+		tools.myWrite(substitute.constFile(dSize, wNb, rNb, z), "../Simon_IPs/"+IPsimon+"/vhd/const.vhd")
+		tools.myWrite(substitute.roundFile(wNb,rNb), "../Simon_IPs/"+IPsimon+"/vhd/round.vhd")
+		tools.myWrite(substitute.counterFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/counter.vhd")
+		tools.myWrite(substitute.topFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/top.vhd")
 
-		tools.myWrite(generate.benchFile(), "../Simon_IPs/"+IPsimon+"/bench/bench_top.vhd")
-		tools.myWrite(generate.benchSynthFile(), "../Simon_IPs/"+IPsimon+"/synth/bench_top_synth.vhd")
+		tools.myWrite(substitute.benchFile(), "../Simon_IPs/"+IPsimon+"/bench/bench_top.vhd")
+		tools.myWrite(substitute.benchSynthFile(), "../Simon_IPs/"+IPsimon+"/synth/bench_top_synth.vhd")
 
-		tools.myWrite(generate.compileVHD(), "../Simon_IPs/"+IPsimon+"/vhd/compile_vhd.sh")
-		tools.myWrite(generate.compileBench(), "../Simon_IPs/"+IPsimon+"/bench/compile_bench.sh")
-		tools.myWrite(generate.compileSynth(), "../Simon_IPs/"+IPsimon+"/synth/compile_synth.sh")
+		tools.myWrite(substitute.compileVHD(), "../Simon_IPs/"+IPsimon+"/vhd/compile_vhd.sh")
+		tools.myWrite(substitute.compileBench(), "../Simon_IPs/"+IPsimon+"/bench/compile_bench.sh")
+		tools.myWrite(substitute.compileSynth(), "../Simon_IPs/"+IPsimon+"/synth/compile_synth.sh")
 	else :
 		print "unavailable to write requested IP description"
 	

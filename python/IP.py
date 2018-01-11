@@ -21,18 +21,27 @@ def createIP(dSize, kSize):
 		wNb = IPparams['wNb']
 		rNb = IPparams['rNb']
 		z = IPparams['z']
+		Key = IPparams['Key']
+		plainT = IPparams['Plaintext']
+		cipherT = IPparams['Ciphertext']
 		tools.myWrite(substitute.constFile(dSize, wNb, rNb, z), "../Simon_IPs/"+IPsimon+"/vhd/const.vhd")
 		tools.myWrite(substitute.roundFile(wNb,rNb), "../Simon_IPs/"+IPsimon+"/vhd/round.vhd")
 		tools.myWrite(substitute.counterFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/counter.vhd")
 		tools.myWrite(substitute.topFile(rNb), "../Simon_IPs/"+IPsimon+"/vhd/top.vhd")
 
-		tools.myWrite(substitute.benchFile(), "../Simon_IPs/"+IPsimon+"/bench/bench_top.vhd")
-		tools.myWrite(substitute.benchSynthFile(), "../Simon_IPs/"+IPsimon+"/synth/bench_top_synth.vhd")
+		tools.myWrite(substitute.benchFile(Key,plainT,cipherT), "../Simon_IPs/"+IPsimon+"/bench/bench_top.vhd")
+		tools.myWrite(substitute.benchSynthFile(Key,plainT,cipherT), "../Simon_IPs/"+IPsimon+"/synth/bench_top_synth.vhd")
 
 		tools.myWrite(substitute.compileVHD(dSize,kSize), "../Simon_IPs/"+IPsimon+"/vhd/compile_vhd.sh")
 		tools.myWrite(substitute.compileBench(dSize,kSize), "../Simon_IPs/"+IPsimon+"/bench/compile_bench.sh")
 		tools.myWrite(substitute.compileSynth(dSize,kSize), "../Simon_IPs/"+IPsimon+"/synth/compile_synth.sh")
+		print "Simon IP [%s,%s] generated" %(dSize,kSize)
 	else :
 		print "unavailable to write requested IP description"
+
+def createAllIP():
+	for dSize in params.IPparams:
+		for kSize in params.IPparams[dSize]:
+			createIP(dSize,kSize)
 	
 

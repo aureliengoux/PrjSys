@@ -1,0 +1,73 @@
+m255
+K4
+z2
+13
+cModel Technology
+Z0 d/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014
+!s112 0.1
+!i10d 8192
+!i10e 25
+!i10f 100
+T_opt
+!s110 1515664693
+V_YKVz]eJGL8GEM:[mDAZ;1
+04 6 2 work tb_top tb 1
+=1-002564c6e24a-5a573534-2bb8f-2c87
+o-quiet -auto_acc_if_foreign -work lib_bench
+n@_opt
+OL;O;10.2c;57
+Etb_top
+Z1 w1515662541
+DEx9 lib_synth 3 top 0 22 RLPK=d3[OF`CElE?GH0Qc3
+Z2 DPx9 vital2000 12 vital_timing 0 22 4Obk6FzZz7P8i2>0<?dVb3
+Z3 DPx7 simprim 11 vcomponents 0 22 8O_3e6jZlmVG1KLDb4Q^E1
+Z4 DPx6 unisim 11 vcomponents 0 22 GSe5`g9<H?BhoL6KEg9iZ3
+DEx9 lib_synth 5 round 0 22 78594N5D_HJn1=kD?Dd9i2
+Z5 DPx9 lib_synth 9 const_def 0 22 Rk>]ZSM5NcN]aB5e[b_;90
+Z6 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
+Z7 DPx4 ieee 15 std_logic_arith 0 22 I`lKR?Ob>E^B_e2VdVLiQ0
+Z8 DPx4 ieee 18 std_logic_unsigned 0 22 @_jbHPR7i^Jh?`2fDCO`m3
+Z9 DPx3 std 6 textio 0 22 Y8d?=bLj9m4jiPLbo;>GT0
+Z10 DPx4 ieee 14 std_logic_1164 0 22 1bm?@Gd;P>[>_lN8Do9gP3
+Z11 d/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/SYNT_PRE_2014
+Z12 8./bench_top_synth.vhd
+Z13 F./bench_top_synth.vhd
+l0
+L17
+VT;IAYzJYO2G>8>;6kgn]91
+Z14 OL;C;10.2c;57
+32
+Z15 !s110 1515664671
+Z16 !s108 1515664670.462896
+Z17 !s90 +acc|-work|lib_bench|./bench_top_synth.vhd|
+Z18 !s107 ./bench_top_synth.vhd|
+Z19 o+acc -work lib_bench
+Z20 tExplicit 1
+!s100 Xg0fak476OPzGIm_dcT4=0
+!i10b 1
+!i111 0
+Atb
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+R10
+DEx4 work 6 tb_top 0 22 T;IAYzJYO2G>8>;6kgn]91
+l41
+L20
+V2CQ;dGDa=J:G;MFa4SG8k0
+R14
+32
+R15
+R16
+R17
+R18
+R19
+R20
+!s100 AOTYYoa;aHQPBEjY5h1n00
+!i10b 1
+!i111 0

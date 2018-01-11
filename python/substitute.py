@@ -42,10 +42,10 @@ def counterFile(rNb):
 		reset = "00000"
 		incr = "00001"
 
-	counterFile = tools.myRead("../Simon_Base_64_128/vhd/counter_process.vhd")
+	counterFile = tools.myRead("../Simon_Base_64_128/vhd/counter.vhd")
 	counterFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", counterFile)
-	counterFile = tools.substituteString(r"\"(?P<dSize>\d+)\"0",r"\"" + str(reset) +"\";",counterFile)
-	counterFile = tools.substituteString(r"\"(?P<dSize>\d+)\"1",r"\"" + str(incr) +"\";",counterFile)
+	counterFile = tools.substituteString("\"(?P<dSize>\d+)0\"","\"" + str(reset) +"\";",counterFile)
+	counterFile = tools.substituteString("\"(?P<dSize>\d+)1\"","\"" + str(incr) +"\";",counterFile)
 
 	return counterFile
 
@@ -57,51 +57,36 @@ def topFile(rNb):
 	else:
 		cSize = 4
 
-	topFile = tools.myRead("../Simon_Base_64_128/vhd/Top.vhd")
+	topFile = tools.myRead("../Simon_Base_64_128/vhd/top.vhd")
 	topFile = tools.substituteString(r"5 downto 0", str(cSize) + r" downto 0", topFile)
 
 	return topFile
 
-def benchFile():
-	return tools.myRead("../Simon_Base_64_128/bench/bench_top.vhd")
+def benchFile(Key,plainT,cipherT):
+	benchFile = tools.myRead("../Simon_Base_64_128/bench/bench_top.vhd")
+	benchFile = tools.substituteString(r"\"1b1a1918131211100b0a090803020100\"", "\"" + Key + "\"", benchFile)
+	benchFile = tools.substituteString(r"\"656b696c20646e75\"", "\""+ plainT + "\"", benchFile)
+	benchFile = tools.substituteString(r"\"44c8fc20b9dfa07\"", "\"" + cipherT + "\"", benchFile)
+	return benchFile
 
-def benchSynthFile():
-	return tools.myRead("../Simon_Base_64_128/SYNT_PRE_2014/bench_top_synth.vhd")
+def benchSynthFile(Key,plainT,cipherT):
+	benchSynthFile = tools.myRead("../Simon_Base_64_128/synth/bench_top_synth.vhd")
+	benchSynthFile = tools.substituteString(r"\"1b1a1918131211100b0a090803020100\"", "\"" + Key + "\"", benchSynthFile)
+	benchSynthFile = tools.substituteString(r"\"656b696c20646e75\"", "\""+ plainT +"\"", benchSynthFile)
+	benchSynthFile = tools.substituteString(r"\"44c8fc20b9dfa07\"", "\""+ cipherT + "\"", benchSynthFile)
+	return benchSynthFile
 
 def compileVHD(dSize,kSize):
-	strScript = "rm -r -f ./lib_simon\n\
-\n\
-vlib lib_simon\n\
-vmap lib_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/vhd/lib_simon\n\
-\n\
-vcom +acc -work lib_simon  ./const.vhd\n\
-vcom +acc -work lib_simon  ./round.vhd\n\
-vcom +acc -work lib_simon  ./counter.vhd\n\
-vcom +acc -work lib_simon  ./top.vhd"
-	return strScript
+	compileVHDFile = tools.myRead("../Simon_Base_64_128/vhd/compile_vhd.sh")
+	compileVHDFile = tools.substituteString(r"Simon_Base_64_128", r"Simon_IPs/Simon_" + str(dSize) + "_" + str(kSize), compileVHDFile)
+	return compileVHDFile
 
 def compileBench(dSize,kSize):
-	strScript = "cd ../vhd/\n\
-./compile_vhd.sh\n\
-cd ../bench\n\
-\n\
-rm -r -f ./lib_bench_simon\n\
-vlib lib_bench_simon\n\
-vmap lib_bench_simon $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/bench/lib_bench_simon\n\
-\n\
-vcom +acc -work lib_bench_simon  ./bench_top.vhd"
-	return strScript
+	compileBenchFile = tools.myRead("../Simon_Base_64_128/bench/compile_bench.sh")
+	compileBenchFile = tools.substituteString(r"Simon_Base_64_128", r"Simon_IPs/Simon_"+str(dSize)+"_"+str(kSize), compileBenchFile)
+	return compileBenchFile
 
 def compileSynth(dSize,kSize):
-	strScript = "rm -r -f ./lib_synth\n\
-\n\
-vlib lib_synth\n\
-vmap lib_synth $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/synth/lib_synth\n\
-#vcom +acc -work lib_synth  ../vhd/const.vhd\n\
-vcom +acc -work lib_synth  ./simon_synth_impl_1/top.vhd\n\
-\n\
-rm -r ./lib_bench_synth\n\
-vlib lib_bench_synth\n\
-vmap lib_bench_synth $HOME/Prj_Sys/Simon_IPs/Simon_"+ str(dSize) +"_"+ str(kSize) +"/synth/lib_bench_synth\n\
-vcom +acc -work lib_bench_synth ./bench_top_synth.vhd"
-	return strScript
+	compileSynthFile = tools.myRead("../Simon_Base_64_128/synth/compile_synth.sh")
+	compileSynthFile = tools.substituteString(r"Simon_Base_64_128", r"Simon_IPs/Simon_"+str(dSize)+"_"+str(kSize), compileSynthFile)
+	return compileSynthFile

@@ -40,7 +40,7 @@ count<=cr_val;
 		     	n_val<=to_unsigned(NB_ROUND,n_val'length); 
 		      done <='1'; --rise flag 
 	else
-					 n_val <= c_val + "000001"; --count val <= n_val
+					 n_val <= cr_val + "000001"; --count val <= n_val
 		       done <='0';	
 	end if;
 

@@ -12,8 +12,8 @@
 rm -r ./lib_synth
 vlib lib_synth
 vmap lib_synth ./lib_synth
-#vcom +acc -work lib_synth  ../vhd/const.vhd
-vcom +acc -work lib_synth  ./simon_synth_impl_1/top.vhd
+vcom +acc -work lib_synth  ../vhd/const.vhd
+vcom +acc -work lib_synth  ./ synth_simon_counter_process_impl_1/Simon.vhd
 
 rm -r ./lib_bench
 vlib lib_bench

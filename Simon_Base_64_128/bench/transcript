@@ -10,6 +10,8 @@
 vsim lib_bench_simon.tb_top
 # vsim lib_bench_simon.tb_top 
 # ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: ./Top.vhd(56): (vopt-1447) Instance "/tb_top/DUT/counter_map" is bound to entity "lib_simon.counter" that has no architectures.
+# ** Warning: [1] ./Top.vhd(62): (vopt-3473) Component instance "/tb_top/DUT/counter_map : counter" is not bound.
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -20,47 +22,11 @@ vsim lib_bench_simon.tb_top
 # Loading work.tb_top(tb)#1
 # Loading lib_simon.top(rtl_top)#1
 # Loading lib_simon.round(rtl_round)#1
-# Loading lib_simon.counter(rtl_counter)#1
-add wave -position end  sim:/tb_top/DUT/clk
-add wave -position end  sim:/tb_top/DUT/nrst
-add wave -position end  sim:/tb_top/DUT/start
-add wave -position end  sim:/tb_top/DUT/key_i
-add wave -position end  sim:/tb_top/DUT/plaintext
-add wave -position end  sim:/tb_top/DUT/ciphertext
-add wave -position end  sim:/tb_top/DUT/done
-add wave -position end  sim:/tb_top/DUT/s_count
-run
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
+# ** Error: (vsim-3173) Entity '/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/vhd/lib_simon.counter' has no architecture.
+# Load interrupted
+# Error loading design
 vsim lib_bench_simon.tb_top
 # vsim lib_bench_simon.tb_top 
-# ** Warning: (vsim-31) Unable to unlink file "/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/lib_bench_simon/_opt__lock".
-# No such file or directory. (errno = ENOENT)
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
@@ -96,10 +62,6 @@ run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/counter_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/counter_map
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
@@ -115,10 +77,3 @@ run
 run
 run
 run
-run
-run
-run
-run
-run
-run
-add wave -position end  sim:/tb_top/DUT/round_map/count

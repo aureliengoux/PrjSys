@@ -25,36 +25,27 @@ vsim lib_bench.tb_top
 # Loading lib_synth.round(rtl_round)#1
 # Loading unisim.fdcp(fdcp_v)#1
 # Loading unisim.fdcpe(fdcpe_v)#1
-# Loading unisim.fdce(fdce_v)#1
-# Loading unisim.inv(inv_v)#1
 # Loading ieee.vital_timing(body)
 # Loading ieee.vital_primitives(body)
 # Loading unisim.vpkg(body)
 # ** Warning: (vsim-3479) Time unit 'ps' is less than the simulator resolution (1ns).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map/ix7784z1316
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map/ix7392z1531
 # Loading unisim.lut3(lut3_v)#1
 # Loading unisim.lut4(lut4_v)#1
 # Loading unisim.lut2(lut2_v)#1
 # Loading unisim.obuf(obuf_v)#1
 # Loading unisim.ibuf(ibuf_v)#1
-# Loading unisim.fdc(fdc_v)#1
+# Loading unisim.fdce(fdce_v)#1
 # Loading unisim.lut1(lut1_v)#1
 # Loading unisim.bufgp(bufgp_v)#1
-add wave -position end  sim:/tb_top/DUT/clk
-add wave -position end  sim:/tb_top/DUT/nrst
-add wave -position end  sim:/tb_top/DUT/key_i
-add wave -position end  sim:/tb_top/DUT/plaintext
-add wave -position end  sim:/tb_top/DUT/ciphertext
-# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 1 times, errno 11
-# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 2 times, errno 11
-# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 3 times, errno 11
-# ** Error: Cannot lock WLF file: "vsim.wlf"
-#           errno 11: Resource temporarily unavailable.
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by: xph3app605  Hostname: cimeld07  ProcessID: 9633
-#           Attempting to use alternate WLF file "./wlftAapm79".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftAapm79
+add wave -position insertpoint  \
+sim:/tb_top/s_clk \
+sim:/tb_top/s_nrst \
+sim:/tb_top/s_key_i \
+sim:/tb_top/s_plaintext \
+sim:/tb_top/s_ciphertext \
+sim:/tb_top/s_start \
+sim:/tb_top/s_done
 run
 run
 run
@@ -62,25 +53,6 @@ run
 run
 run
 run
-# ** Error:  FATAL ERROR: ciphertext_error.
-#    Time: 700 ns  Iteration: 0  Instance: /tb_top
-run
-run
-run
-run
-run
-add wave -position end  sim:/tb_top/DUT/s_done
-add wave -position end  sim:/tb_top/DUT/s_count
-restart
-run
-run
-run
-run
-run
-run
-run
-# ** Error:  FATAL ERROR: ciphertext_error.
-#    Time: 700 ns  Iteration: 0  Instance: /tb_top
 run
 run
 run

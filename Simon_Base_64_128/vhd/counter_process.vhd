@@ -16,10 +16,10 @@ entity counter is
    );
 end counter;
 
-architecture rtl_counter of counter
+architecture rtl_counter of counter is 
+signal n_val,cr_val: std_logic_vector (5 downto 0);
+
 begin 
-
-
 synchro: process (clk,nrst)
 begin
  if (nrst ='0')then 
@@ -36,11 +36,11 @@ count<=cr_val;
 	if (start = '1') then
 					n_val<="000000";
 					done <= '0';
-	elsif  (n_val >= NB_ROUND )then        	  
-		     	n_val<=to_unsigned(NB_ROUND,n_val'length); 
+	elsif  (cr_val >= NB_ROUND )then        	  
+		     	n_val<=cr_val; 
 		      done <='1'; --rise flag 
 	else
-					 n_val <= c_val + "000001"; --count val <= n_val
+					 n_val <= cr_val + "000001"; 
 		       done <='0';	
 	end if;
 

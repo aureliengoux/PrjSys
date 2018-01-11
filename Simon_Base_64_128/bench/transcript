@@ -7,8 +7,8 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-vsim lib_bench_simon.tb_top(tb)
-# vsim lib_bench_simon.tb_top(tb) 
+vsim lib_bench_simon.tb_top
+# vsim lib_bench_simon.tb_top 
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
@@ -23,11 +23,12 @@ vsim lib_bench_simon.tb_top(tb)
 # Loading lib_simon.counter(rtl_counter)#1
 add wave -position end  sim:/tb_top/DUT/clk
 add wave -position end  sim:/tb_top/DUT/nrst
+add wave -position end  sim:/tb_top/DUT/start
 add wave -position end  sim:/tb_top/DUT/key_i
 add wave -position end  sim:/tb_top/DUT/plaintext
 add wave -position end  sim:/tb_top/DUT/ciphertext
+add wave -position end  sim:/tb_top/DUT/done
 add wave -position end  sim:/tb_top/DUT/s_count
-add wave -position end  sim:/tb_top/DUT/s_done
 run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
@@ -47,10 +48,77 @@ run
 run
 run
 run
-# ** Error:  FATAL ERROR: ciphertext_error.
-#    Time: 700 ns  Iteration: 0  Instance: /tb_top
 run
 run
 run
-# ** Warning: (vsim-31) Unable to unlink file "/tp/xph3app/xph3app605/Projet_sys_complexe/bench/lib_bench_simon/_opt__lock".
+run
+run
+run
+run
+run
+run
+vsim lib_bench_simon.tb_top
+# vsim lib_bench_simon.tb_top 
+# ** Warning: (vsim-31) Unable to unlink file "/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/lib_bench_simon/_opt__lock".
 # No such file or directory. (errno = ENOENT)
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading lib_simon.const_def
+# Loading work.tb_top(tb)#1
+# Loading lib_simon.top(rtl_top)#1
+# Loading lib_simon.round(rtl_round)#1
+# Loading lib_simon.counter(rtl_counter)#1
+add wave -position insertpoint  \
+sim:/tb_top/DUT/clk \
+sim:/tb_top/DUT/nrst \
+sim:/tb_top/DUT/start \
+sim:/tb_top/DUT/key_i \
+sim:/tb_top/DUT/plaintext \
+sim:/tb_top/DUT/ciphertext \
+sim:/tb_top/DUT/done \
+sim:/tb_top/DUT/s_count
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/counter_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/counter_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/counter_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/counter_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+add wave -position end  sim:/tb_top/DUT/round_map/count

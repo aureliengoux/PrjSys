@@ -1,0 +1,68 @@
+# //  ModelSim SE-64 10.2c Jul 18 2013 Linux 3.2.0-4-amd64
+# //
+# //  Copyright 1991-2013 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+vsim lib_bench_simon.tb_top
+# vsim lib_bench_simon.tb_top 
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: ./top.vhd(54): (vopt-1272) Length of count is 7; length of component port is 6.
+# ** Error: ./top.vhd(54): (vopt-1130) Port "done" of entity "round" is not in the component being instantiated.
+# Optimization failed
+# Error loading design
+vsim lib_bench_simon.tb_top
+# vsim lib_bench_simon.tb_top 
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: ./top.vhd(54): (vopt-1272) Length of count is 7; length of component port is 6.
+# Optimization failed
+# Error loading design
+vsim lib_bench_simon.tb_top
+# vsim lib_bench_simon.tb_top 
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading lib_simon.const_def
+# Loading work.tb_top(tb)#1
+# Loading lib_simon.top(rtl_top)#1
+# Loading lib_simon.round(rtl_round)#1
+# Loading lib_simon.counter(rtl_counter)#1
+add wave -position insertpoint  \
+sim:/tb_top/DUT/clk \
+sim:/tb_top/DUT/nrst \
+sim:/tb_top/DUT/start \
+sim:/tb_top/DUT/key_i \
+sim:/tb_top/DUT/plaintext \
+sim:/tb_top/DUT/ciphertext \
+sim:/tb_top/DUT/done \
+sim:/tb_top/DUT/s_count
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 2  Instance: /tb_top/DUT/round_map
+run
+run
+run
+run
+run
+# ** Error:  FATAL ERROR: ciphertext_error.
+#    Time: 550 ns  Iteration: 0  Instance: /tb_top
+run
+run
+run

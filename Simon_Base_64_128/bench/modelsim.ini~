@@ -60,8 +60,8 @@ others = $MODEL_TECH/../modelsim.ini
 ;
 ; AutoLibMapping = 0
 
-lib_bench_simon = /tp/xph3app/xph3app605/Projet_sys_complexe/bench/lib_bench_simon
-lib_simon = /tp/xph3app/xph3app605/Projet_sys_complexe/vhd/lib_simon
+lib_bench_simon = /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/lib_bench_simon
+lib_simon = /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/vhd/lib_simon
 [DefineOptionset]
 ; Define optionset entries for the various compilers, vmake, and vsim.
 ; These option sets can be used with the "-optionset <optionsetname>" syntax.

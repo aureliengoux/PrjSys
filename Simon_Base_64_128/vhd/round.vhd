@@ -10,12 +10,10 @@ entity round is
 	 	clk : in std_logic;
 		nrst: in std_logic;
     start: in std_logic;
-		done: in std_logic;
 		count: in std_logic_vector(5 downto 0); 
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 		data_in: in std_logic_vector(DATA_SIZE-1 downto 0); 
    	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
-    --done: out std_logic	
 	);
 end round;
 
@@ -60,18 +58,8 @@ begin
 		end if; 
 	end process synchro;
 
-	--
-	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3xorkey,s1_key,key_temp1,key_temp2,r_key,start)
+	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3xorkey,s1_key,key_temp1,key_temp2,r_key)
 	begin
-		--assignations for debug : traces
-	 	--n_key <= cr_key;
-	 	--key_temp1 <= (others => '-');
-	 	--key_temp2 <=(others => '-');
-	 	--r_key <=(others => '-');
-		--msb_key <= (others => '-');
-	 	--s3_key <= (others => '-');
-	 	--s3xorkey <= (others => '-');
-	 	--s1_key <= (others => '-');
 		if (count < (NB_ROUND))then
 			msb_key <= cr_key(KEY_SIZE-1 downto (WORD_SIZE*(WORDS_NB-1))); --gets the 32 most significant bits
 			s3_key <= msb_key(2 downto 0)&msb_key(WORD_SIZE-1 downto 3); -- right rotation (3 bits)
@@ -96,7 +84,6 @@ begin
 		end if; 
 	end process key_gen;
 
-	--
 	data_path : process(cr_data,count,cr_key,r_data,s2_data,s8_data, s1_data,start)
 	begin
 	
@@ -115,11 +102,7 @@ begin
 			s2_data<=(others => '0');
 			n_data<= cr_data;   
 			r_data<= (others => '0'); 
-			
 		end if;	
 	end process;
-
-
-
 end rtl_round;
 

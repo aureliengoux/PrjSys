@@ -11,6 +11,6 @@ package const_def is
 	constant NB_ROUND  : integer :=  52;
 	
 	-- Key schedule encryption 
-  constant ROUND_CONST: std_logic_vector(31 downto 0):= X"fffffffc"; -- constant "c" for key schedule (see figure)
+  constant ROUND_CONST: std_logic_vector(WORD_SIZE-1 downto 0):= X"fffffffffffc"; -- constant "c" for key schedule (see figure)
   constant Z         : std_logic_vector(61 downto 0 ):= "11001101101001111110001000010100011001001011000000111011110101"; --constant sequence "z" for key schedule (see figure)
 end const_def;

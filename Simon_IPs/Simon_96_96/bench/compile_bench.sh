@@ -1,6 +1,7 @@
 cd ../vhd/
-./script
+./compile_vhd.sh
 cd ../bench
+
 
 rm -r ./lib_bench_simon
 vlib lib_bench_simon

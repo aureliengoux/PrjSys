@@ -3,59 +3,58 @@ K4
 z2
 13
 cModel Technology
-Z0 d/tp/xph3app/xph3app605/Projet_sys_complexe/bench
+Z0 d/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench
 !s112 0.1
 !i10d 8192
 !i10e 25
 !i10f 100
-Pconst_def
-Z1 DPx4 ieee 15 std_logic_arith 0 22 I`lKR?Ob>E^B_e2VdVLiQ0
-Z2 DPx4 ieee 18 std_logic_unsigned 0 22 @_jbHPR7i^Jh?`2fDCO`m3
-Z3 DPx3 std 6 textio 0 22 Y8d?=bLj9m4jiPLbo;>GT0
-Z4 DPx4 ieee 14 std_logic_1164 0 22 1bm?@Gd;P>[>_lN8Do9gP3
-w1513611057
-Z5 d/tp/xph3app/xph3app605/Projet_sys_complexe/bench
-8/tp/xph3app/xph3app605/Projet_sys_complexe/vhd/const_32_64.vhd
-F/tp/xph3app/xph3app605/Projet_sys_complexe/vhd/const_32_64.vhd
-l0
-L5
-V:]]OaAkdJ_ikCN7ei1B3?1
-Z6 OL;C;10.2c;57
-32
-Z7 o+acc -work lib_bench_simon
-Z8 tExplicit 1
-!s100 ZYjA5z0TGNMdZdU>nHU8X0
-Z9 !s110 1513614268
-!i10b 1
-!s108 1513614268.529550
-!s90 +acc|-work|lib_bench_simon|/tp/xph3app/xph3app605/Projet_sys_complexe/vhd/const_32_64.vhd|
-!s107 /tp/xph3app/xph3app605/Projet_sys_complexe/vhd/const_32_64.vhd|
-!i111 0
 Etb_top
-w1513594994
-Z10 DEx9 lib_simon 7 counter 0 22 CUC9WU[]WiUj6B8VKz2EE2
-Z11 DEx9 lib_simon 5 round 0 22 o]lZIBP`LCZBR9jUKiAF?0
-DEx9 lib_simon 3 top 0 22 Szcm:DNidMg6eNTCQUX2z1
-Z12 DPx9 lib_simon 9 const_def 0 22 kRMJObL=CB`3zgfD=fzUl0
-Z13 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
-R1
-R2
-R3
-R4
-R5
-8/tp/xph3app/xph3app605/Projet_sys_complexe/bench/bench_top_32_64.vhd
-F/tp/xph3app/xph3app605/Projet_sys_complexe/bench/bench_top_32_64.vhd
+Z1 w1515397008
+Z2 DEx9 lib_simon 7 counter 0 22 0dnjP5<[8lMMcI9h;C1N;2
+Z3 DEx9 lib_simon 5 round 0 22 k:d;DF>0gl0N<B21iYeWG2
+DEx9 lib_simon 3 top 0 22 ZJFF^@G0D[?;Sf_:G;NVd1
+Z4 DPx9 lib_simon 9 const_def 0 22 kRMJObL=CB`3zgfD=fzUl0
+Z5 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
+Z6 DPx4 ieee 15 std_logic_arith 0 22 I`lKR?Ob>E^B_e2VdVLiQ0
+Z7 DPx4 ieee 18 std_logic_unsigned 0 22 @_jbHPR7i^Jh?`2fDCO`m3
+Z8 DPx3 std 6 textio 0 22 Y8d?=bLj9m4jiPLbo;>GT0
+Z9 DPx4 ieee 14 std_logic_1164 0 22 1bm?@Gd;P>[>_lN8Do9gP3
+Z10 d/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench
+Z11 8/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/bench_top.vhd
+Z12 F/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/bench_top.vhd
 l0
 L12
 VDbX?hm7XoGh>I3TL7l<0S3
 !s100 U:UdYF4DzI3JMf0NQIj>z0
-R6
+Z13 OL;C;10.2c;57
 32
-R9
+Z14 !s110 1515407259
 !i10b 1
-!s108 1513614268.628579
-!s90 +acc|-work|lib_bench_simon|/tp/xph3app/xph3app605/Projet_sys_complexe/bench/bench_top_32_64.vhd|
-!s107 /tp/xph3app/xph3app605/Projet_sys_complexe/bench/bench_top_32_64.vhd|
+Z15 !s108 1515407259.672948
+Z16 !s90 +acc|-work|lib_bench_simon|/tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/bench_top.vhd|
+Z17 !s107 /tp/xph3app/xph3app605/Prj_Sys/Simon_Base_64_128/bench/bench_top.vhd|
 !i111 0
+Z18 o+acc -work lib_bench_simon
+Z19 tExplicit 1
+Atb
+R4
+R5
+R6
 R7
 R8
+R9
+DEx4 work 6 tb_top 0 22 DbX?hm7XoGh>I3TL7l<0S3
+l36
+L15
+V:8a11Kz4JaFXF:WnlioH@3
+!s100 gJBHFWnEEb3Z3RO0mlO9i0
+R13
+32
+R14
+!i10b 1
+R15
+R16
+R17
+!i111 0
+R18
+R19

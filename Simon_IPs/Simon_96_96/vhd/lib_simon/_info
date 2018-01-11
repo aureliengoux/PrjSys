@@ -1,0 +1,176 @@
+m255
+K4
+z2
+13
+cModel Technology
+Z0 d/tp/xph3app/xph3app605/Prj_Sys/Simon_IPs/Simon_96_96/vhd
+!s112 0.1
+!i10d 8192
+!i10e 25
+!i10f 100
+Pconst_def
+Z1 DPx4 ieee 15 std_logic_arith 0 22 I`lKR?Ob>E^B_e2VdVLiQ0
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 @_jbHPR7i^Jh?`2fDCO`m3
+Z3 DPx3 std 6 textio 0 22 Y8d?=bLj9m4jiPLbo;>GT0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 1bm?@Gd;P>[>_lN8Do9gP3
+w1515658002
+Z5 d/tp/xph3app/xph3app605/Prj_Sys/Simon_IPs/Simon_96_96/vhd
+8./const.vhd
+F./const.vhd
+l0
+L5
+V17j5W7VD[49z4oZT?6jIT2
+Z6 OL;C;10.2c;57
+32
+Z7 o+acc -work lib_simon
+Z8 tExplicit 1
+!s100 Eh]SCo9ZQ^S?VX8[97NgW0
+!s110 1515658920
+!i10b 1
+!s108 1515658920.903607
+!s90 +acc|-work|lib_simon|./const.vhd|
+!s107 ./const.vhd|
+!i111 0
+Ecounter
+Z9 w1515658763
+Z10 DPx9 lib_simon 9 const_def 0 22 17j5W7VD[49z4oZT?6jIT2
+R1
+R2
+Z11 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
+R3
+R4
+R5
+Z12 8./counter.vhd
+Z13 F./counter.vhd
+l0
+L9
+V0dnjP5<[8lMMcI9h;C1N;2
+R6
+32
+Z14 !s110 1515658921
+Z15 !s108 1515658921.092420
+Z16 !s90 +acc|-work|lib_simon|./counter.vhd|
+Z17 !s107 ./counter.vhd|
+R7
+R8
+!s100 knn`8lY;o7?XN_IJzkMd?1
+!i10b 1
+!i111 0
+Artl_counter
+R10
+R1
+R2
+R11
+R3
+R4
+DEx4 work 7 counter 0 22 0dnjP5<[8lMMcI9h;C1N;2
+l22
+L19
+Vd<3HgkTHl;2kKN9=3?4mQ2
+R6
+32
+R14
+R15
+R16
+R17
+R7
+R8
+!s100 _4:Ieh6cnNoR7gj5=GFYO2
+!i10b 1
+!i111 0
+Eround
+Z18 w1515658914
+R10
+R11
+R1
+R2
+R3
+R4
+R5
+Z19 8./round.vhd
+Z20 F./round.vhd
+l0
+L8
+VDASF8EEFiGmDARGW_XA0H3
+R6
+32
+R14
+Z21 !s108 1515658921.004352
+Z22 !s90 +acc|-work|lib_simon|./round.vhd|
+Z23 !s107 ./round.vhd|
+R7
+R8
+!s100 041@8S6]UOnHoHlK:OWHA2
+!i10b 1
+!i111 0
+Artl_round
+R10
+R11
+R1
+R2
+R3
+R4
+DEx4 work 5 round 0 22 DASF8EEFiGmDARGW_XA0H3
+l42
+L21
+V9DzJ7b`V=IoCeoFTN;Z?i3
+R6
+32
+R14
+R21
+R22
+R23
+R7
+R8
+!s100 <>jni7Zn>[>Ai4SAJ]k240
+!i10b 1
+!i111 0
+Etop
+Z24 w1515658370
+DEx9 lib_simon 7 counter 0 22 0dnjP5<[8lMMcI9h;C1N;2
+DEx9 lib_simon 5 round 0 22 DASF8EEFiGmDARGW_XA0H3
+R10
+R11
+R1
+R2
+R3
+R4
+R5
+Z25 8./top.vhd
+Z26 F./top.vhd
+l0
+L10
+VZJFF^@G0D[?;Sf_:G;NVd1
+!s100 92E0A[aK1LIL=hOh><^kY0
+R6
+32
+R14
+!i10b 1
+Z27 !s108 1515658921.175549
+Z28 !s90 +acc|-work|lib_simon|./top.vhd|
+Z29 !s107 ./top.vhd|
+!i111 0
+R7
+R8
+Artl_top
+R10
+R11
+R1
+R2
+R3
+R4
+DEx4 work 3 top 0 22 ZJFF^@G0D[?;Sf_:G;NVd1
+l45
+L22
+VLJlo<J06UO_e]872C95=W2
+!s100 XZ1>M>R7:cKb`WlSmc6PT1
+R6
+32
+R14
+!i10b 1
+R27
+R28
+R29
+!i111 0
+R7
+R8

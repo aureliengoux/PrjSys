@@ -6,7 +6,7 @@ from os import path
 def createWorkSpace(dSize,kSize):
 	IPsimon = "Simon_"+str(dSize)+"_"+str(kSize)
 	if os.path.isdir("../Simon_IPs/"+IPsimon):
-		os.system("rm -r ../Simon_IPs/"+IPsimon) 
+		os.system("rm -r -f ../Simon_IPs/"+IPsimon) 
 	os.system("mkdir ../Simon_IPs/"+IPsimon) #Owerwrite IP base folder
 	os.system("mkdir ../Simon_IPs/"+IPsimon+"/vhd") #create IP description folders
 	os.system("mkdir ../Simon_IPs/"+IPsimon+"/bench") 

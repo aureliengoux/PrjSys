@@ -10,12 +10,10 @@ entity round is
 	 	clk : in std_logic;
 		nrst: in std_logic;
     start: in std_logic;
-		done: in std_logic;
-		count: in std_logic_vector(6 downto 0); 
+		count: in std_logic_vector(5 downto 0); 
     key_i : in std_logic_vector(KEY_SIZE-1 downto 0);	
 		data_in: in std_logic_vector(DATA_SIZE-1 downto 0); 
    	data_out: out std_logic_vector (DATA_SIZE-1 downto 0)
-    --done: out std_logic	
 	);
 end round;
 
@@ -28,8 +26,8 @@ architecture rtl_round of round is
 	signal zji: std_logic_vector(WORD_SIZE-1 downto 0); -- key encryption with "c" and "z" sequence constants 
 	signal msb_key: std_logic_vector(WORD_SIZE-1 downto 0); --current key 4th word (96-127)
 	signal s3_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 3 bits right rotation of msb_key 
-	signal s3_key: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 2nd current key word (32-63)
-	signal s1_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 1 bit right rotation of s3_key
+	--signal s3xorkey: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 2nd current key word (32-63)
+	signal s1_key: std_logic_vector(WORD_SIZE-1 downto 0); -- 1 bit right rotation of s3xorkey
 	signal key_temp1: std_logic_vector(WORD_SIZE-1 downto 0); -- s3_key xor 1st current key word (0-31)
 	signal key_temp2: std_logic_vector(WORD_SIZE-1 downto 0); -- s1_key xor key_temp2
 	signal r_key: std_logic_vector(WORD_SIZE-1 downto 0); -- round key
@@ -60,22 +58,12 @@ begin
 		end if; 
 	end process synchro;
 
-	--
-	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s3_key,s1_key,key_temp1,key_temp2,r_key,start)
+	key_gen: process(key_i,count,cr_key,msb_key,s3_key,s1_key,key_temp1,key_temp2,r_key)
 	begin
-		--assignations for debug : traces
-	 	--n_key <= cr_key;
-	 	--key_temp1 <= (others => '-');
-	 	--key_temp2 <=(others => '-');
-	 	--r_key <=(others => '-');
-		--msb_key <= (others => '-');
-	 	--s3_key <= (others => '-');
-	 	----s3_key <= (others => '-');
-	 	--s1_key <= (others => '-');
 		if (count < (NB_ROUND))then
 			msb_key <= cr_key(KEY_SIZE-1 downto (WORD_SIZE*(WORDS_NB-1))); --gets the 32 most significant bits
 			s3_key <= msb_key(2 downto 0)&msb_key(WORD_SIZE-1 downto 3); -- right rotation (3 bits)
-			--s3_key <= s3_key xor cr_key((WORD_SIZE*2)-1 downto WORD_SIZE); -- xor with 2nd word of current key (32-63) 
+			--s3xorkey <= s3_key xor cr_key((WORD_SIZE*2)-1 downto WORD_SIZE); -- xor with 2nd word of current key (32-63) 
 			s1_key <= (s3_key(0)& s3_key((WORD_SIZE-1) downto 1)); --right rotation (1 bits)
 			key_temp1 <= s3_key xor cr_key(WORD_SIZE-1 downto 0); -- xor with 1st word of current key (0-31)
 			key_temp2 <= key_temp1 xor s1_key;       
@@ -86,7 +74,7 @@ begin
 			--assignation of all signals in all branches to avoid latches
 			msb_key <= (others => '0');
 		 	s3_key <= (others => '0');
-			--s3_key <= (others => '0');
+			--s3xorkey <= (others => '0');
 			s1_key <= (others => '0');
 			key_temp1 <= (others => '0');
 			key_temp2 <= (others => '0');      
@@ -96,7 +84,6 @@ begin
 		end if; 
 	end process key_gen;
 
-	--
 	data_path : process(cr_data,count,cr_key,r_data,s2_data,s8_data, s1_data,start)
 	begin
 	
@@ -115,11 +102,7 @@ begin
 			s2_data<=(others => '0');
 			n_data<= cr_data;   
 			r_data<= (others => '0'); 
-			
 		end if;	
 	end process;
-
-
-
 end rtl_round;
 

@@ -44,19 +44,19 @@ DUT: top port map (s_clk,s_nrst,s_start,s_key_i,s_plaintext,s_ciphertext,s_done)
 	process
 	begin
     s_nrst<='0';
-	 	s_key_i<= x"1b1a1918131211100b0a090803020100";
-	 	s_plaintext<=x"656b696c20646e75";
+	 	s_key_i<= x"1f1e1d1c1b1a191817161514131211100f0e0d0c0v0a09080706050403020100";
+	 	s_plaintext<=x"74206e69206d6f6f6d69732061207369";
 		wait for 500 ns;
 		s_nrst<='1';     
 		s_start<='1';
     wait for 50 ns;
 		s_start<='0';
-    --assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error;	 	
+    --assert s_ciphertext= x"8d2b5579afc8a3a03vf72a87efe7b868" report" FATAL ERROR: ciphertext_error." severity error;	 	
     wait for 500 ns;
     s_start<='1';
 		wait for 50 ns;
 		s_start<='0';
-		--assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error;
+		--assert s_ciphertext= x"8d2b5579afc8a3a03vf72a87efe7b868" report" FATAL ERROR: ciphertext_error." severity error;
 		wait for 500 ns;
     
 	 	wait ;

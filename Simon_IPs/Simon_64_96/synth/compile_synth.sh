@@ -1,21 +1,17 @@
-#rm -r $HOME/Projet_sys_complexe/SYNT_PRE_2014/lib_synth
-#vlib lib_synth
-#vmap lib_synth $HOME//Projet_sys_complexe/SYNT_PRE_2014/lib_synth
-#vcom +acc -work lib_synth  $HOME/Projet_sys_complexe/vhd/const.vhd
-#vcom +acc -work lib_synth  $HOME/Projet_sys_complexe/SYNT_PRE_2014/simon_synth_impl_1/top.vhd
+source $HOME/settings/settings_modsim10_2c.sh
+source $HOME/settings/settings_precision2014a_64b.sh
 
-#rm -r $HOME/Projet_sys_complexe/SYNT_PRE_2014/lib_bench
-#vlib lib_bench
-#vmap lib_bench $HOME//Projet_sys_complexe/SYNT_PRE_2014/lib_bench
-#vcom +acc -work lib_bench $HOME/Projet_sys_complexe/SYNT_PRE_2014/bench_top_synth.vhd
+vmap simprim  ${XILINX}/vhdl/lib/${SIMPRIMVER}/simprim
+vmap unisim  ${XILINX}/vhdl/lib/${SIMPRIMVER}/unisim
+vmap XilinxCoreLib  ${XILINX}/vhdl/lib/${SIMPRIMVER}/xilinxcorelib
 
-rm -r ./lib_synth
+rm -r -f ./lib_synth
 vlib lib_synth
-vmap lib_synth ./lib_synth
+vmap lib_synth $HOME/Prj_Sys/Simon_IPs/Simon_64_96/synth/lib_synth
 vcom +acc -work lib_synth  ../vhd/const.vhd
 vcom +acc -work lib_synth  ./ synth_simon_counter_process_impl_1/Simon.vhd
 
-rm -r ./lib_bench
+rm -r -f ./lib_bench
 vlib lib_bench
-vmap lib_bench ./lib_bench
+vmap lib_bench $HOME/Prj_Sys/Simon_IPs/Simon_64_96/bench/lib_bench
 vcom +acc -work lib_bench ./bench_top_synth.vhd

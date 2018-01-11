@@ -49,7 +49,7 @@ DUT: top port map (s_clk,s_nrst,s_start,s_key_i,s_plaintext,s_ciphertext,s_done)
 	process
 	begin
     s_nrst<='0';
-	 	s_key_i<= x131211100b0a090803020100;
+	 	s_key_i<= x"131211100b0a090803020100";
 	 	s_plaintext<=x"6f7220676e696c63";
 		wait for 500 ns;
 		s_nrst<='1';     

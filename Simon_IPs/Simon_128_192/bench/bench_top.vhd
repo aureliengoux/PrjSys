@@ -47,18 +47,23 @@ DUT: top port map (s_clk,s_nrst,s_start,s_key_i,s_plaintext,s_ciphertext,s_done)
 	 	s_key_i<= x"17161514131211100f0e0d0c0b0a09080706050403020100";
 	 	s_plaintext<=x"206572656874206e6568772065626972";
 		wait for 500 ns;
-		s_nrst<='1';     
+		s_nrst<='1'; 
+    
 		s_start<='1';
     wait for 50 ns;
 		s_start<='0';
-    --assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity error;	 	
-    wait for 500 ns;
-    s_start<='1';
-		wait for 50 ns;
+    wait until s_done ='1';
+    assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity failure;	 	
+    wait for 50 ns;
+ 
+   	s_start<='1';
+    wait for 50 ns;
 		s_start<='0';
-		--assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity error;
+    wait until s_done ='1';
+		assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity failure;
 		wait for 500 ns;
     
+    assert false report "test pass, failure ending test" severity failure; 
 	 	wait ;
 	end process;
 

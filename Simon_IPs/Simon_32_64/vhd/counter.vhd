@@ -23,7 +23,7 @@ begin
 synchro: process (clk,nrst)
 begin
  if (nrst ='0')then 
-    cr_val <= "00000";;
+    cr_val <= "00000";
  elsif (clk'event and clk='1') then --rising edge 
    cr_val <= n_val;
  end if; 
@@ -34,13 +34,13 @@ counting:process (start,cr_val)
 begin
 count<=cr_val;
 	if (start = '1') then
-					n_val<="00000";;
+					n_val<="00000";
 					done <= '0';
 	elsif  (cr_val >= NB_ROUND )then        	  
 		     	n_val<=cr_val; 
 		      done <='1'; --rise flag 
 	else
-					 n_val <= cr_val + "00001";; 
+					 n_val <= cr_val + "00001"; 
 		       done <='0';	
 	end if;
 

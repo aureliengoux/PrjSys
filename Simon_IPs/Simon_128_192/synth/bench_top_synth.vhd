@@ -56,12 +56,12 @@ DUT: top port map (s_clk,s_nrst,s_start,s_key_i,s_plaintext,s_ciphertext,s_done)
 		s_start<='1';
     wait for 50 ns;
 		s_start<='0';
-    --assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity error;	 	
+    --assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error;	 	
     wait for 500 ns;
     s_start<='1';
 		wait for 50 ns;
 		s_start<='0';
-		--assert s_ciphertext= x"c4ac61effcdc0d4f6c9c8d6e2597b85b" report" FATAL ERROR: ciphertext_error." severity error;
+		--assert s_ciphertext= x"44c8fc20b9dfa07" report" FATAL ERROR: ciphertext_error." severity error;
 		wait for 500 ns;
     
 	 	wait ;

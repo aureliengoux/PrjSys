@@ -1,6 +1,7 @@
 source $HOME/settings/settings_modsim10_2c.sh
 
 cd ../vhd/
+ chmod +x compile_vhd.sh
 ./compile_vhd.sh
 cd ../bench
 

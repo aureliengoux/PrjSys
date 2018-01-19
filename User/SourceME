@@ -1,0 +1,3 @@
+#!/bin/sh
+chmod +x Simon_Generator.sh
+export SIMON_WORKSPACE=`pwd`

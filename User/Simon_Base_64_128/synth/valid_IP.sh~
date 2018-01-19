@@ -1,0 +1,7 @@
+rm -r -f Simon_impl_1
+rm -f Simon.psp
+source 
+precision -shell -file autoSynth.tcl
+chmod +x compile_synth.sh
+./compile_synth.sh
+vsim -c -do test.tcl

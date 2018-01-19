@@ -1,0 +1,5 @@
+#!/bin/sh
+chmod +x Simon_Generator.sh
+chmod +x Simon_Verif_Simu.sh
+chmod +x Simon_Verif_Synth.sh
+export SIMON_WORKSPACE=`pwd`
